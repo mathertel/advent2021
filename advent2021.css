@@ -1,0 +1,16 @@
+/* Minimal global CSS for Adventscalendar */
+
+html {
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+pre {padding: 0.2em;background-color: #eeeecc;}
+code {background-color: #eeeecc;}
