@@ -14,16 +14,6 @@ I spend some time to write some text to not just provide code snippets. I also a
 Doors will be available on each of the 24 days in 2021 and will stay open.
 
 
-<p>This one was created from my collection of useful links and snippets regarding the possibilities of the native browser technologies in 2020/2021.
-It focuses on using the CSS available as of 2021 to overcome the restrictions of older browsers.
-</p>
-
-<p>Behind each door you can find something - just for fun or education.</p>7
-
-<p>I spend some time to write some text to not just provide code snippets. I also added helpful links on some topics you may find more detailled information.</p>
-
-<p>Doors will be available on each of the 24 days in 2021 and will stay open.</p>
-
 ## License
 
 This work is published under the Creative Commons CC0 1.0 License. “No Rights Reserved”. See [LICENSE](/LICENSE)
