@@ -1,0 +1,16 @@
+name: Link Checker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Link Checker
+        # https://github.com/lycheeverse/lychee-action
+        uses: lycheeverse/lychee-action@v1.1.1
+        with:
+          args: --verbose --no-progress **/*.md **/*.htm **/*.html
