@@ -12,6 +12,11 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  position: relative;
+  max-width: 800px;
+}
+
 .back {
   position: absolute;
   top: 1rem;
