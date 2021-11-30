@@ -7,9 +7,29 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
+}
+
+.back {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.4rem;
+  background-color: red;
+  user-select: none;
+  cursor: pointer;
+}
+
+.back::after {
+  position: absolute;
+  content: "\274C";
+  left:0;
+  color:white;
+  font-weight:800;
 }
 
 pre {padding: 0.2em}
@@ -28,7 +48,7 @@ pre > code { display:block}
   color: #fff;
 }
 
-.taglist > a:before {
+.taglist > a::before {
   content: "";
   border-top: 0.8em solid transparent;
   border-bottom: 0.8em solid transparent;
