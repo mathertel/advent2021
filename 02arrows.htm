@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS Arrows</title>
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+
+  <style>
+    .pause {
+      position: relative;
+      display: inline-block;
+      vertical-align: text-bottom;
+      height: 1em;
+      width: 0.65em;
+    }
+
+    .pause::before {
+      content: '';
+      position: absolute;
+      height: 1em;
+      width: 0.25em;
+      background-color: #203050;
+    }
+
+    .pause::after {
+      content: '';
+      position: absolute;
+      height: 1em;
+      width: 0.25em;
+      right: 0;
+      background-color: #203050;
+    }
+
+    .play, .arrow {
+      /* a rotated triangle */
+      position: relative;
+      display: inline-block;
+      vertical-align: text-bottom;
+      height: 0px;
+      width: 0px;
+      border: 0.5em solid;
+      border-color:
+        #203050 #203050 transparent transparent;
+      transform: scale(0.707) rotate(45deg);
+    }
+
+    .arrow::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 0.5em;
+      width: 1em;
+      background-color: #203050;
+      transform:
+        scale(0.707) rotate(-45deg) translate(0.25em, 0.25em);
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Arrows</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Why use images when CSS can too. How to create simple arrow images in CSS and avoid downloading images.</p>
+  </fieldset>
+
+  <p>Pause: <span class="pause"></span> &nbsp;Play: <span class="play"></span> &nbsp;Arrow: <span class="arrow"></span></p>
+
+  <h2>How it works</h2>
+
+  <p>The CSS trick here is to use the 2 pseudo elements named <code>::before</code> and <code>::after</code>.
+    They cannot be defined in the html but only using CSS rules. Here all sizes are based on <code>em</code> to allow
+    using them inline.
+  </p>
+
+  <p>The <b>pause button</b> is the simplest here. It defines a absolute positioned rectangular element at position 0,0
+    and another one a 0.5em to the right.</p>
+  <pre>&lt;span class="pause"&gt;&lt;/span&gt;</pre>
+
+  <p>The <b>play button</b> is using a zero-sized element with a border on 2 sides. Without rotation this looks like
+    <span class="play" style="transform:none"></span> but with some rotation and scaling (1/sqrt(2)) it works inline.
+    <span class="play"></span>.
+  </p>
+
+  <pre>&lt;span class="play"&gt;&lt;/span&gt;</pre>
+
+  <p>The <b>arrow button</b> is combining both. The block in the <code>::before</code> element is rotated with the main
+    element and must be rotated back.
+  </p>
+
+  <pre>&lt;span class="arrow"&gt;&lt;/span&gt;</pre>
+
+  <p>You ma find examples with a single colon notation like <code>:after</code>. This still works in current browsers
+    but CSS3 defined the double colon notation like <code>::after</code> for pseudo elements and use the single colon notation for pseudo-classes like <code>:hover</code>.
+  </p>
+
+  <h2>CSS in use:</h2>
+
+  <pre id="csscode"></pre>
+  <script>
+    document.querySelector('pre#csscode').textContent = document.querySelector('style').textContent.replace(/^    /mg, "");
+  </script>
+
+  <h2>See also</h2>
+
+  <ul>
+    <li><a href="https://freefrontend.com/css-arrows/">https://freefrontend.com/css-arrows/</a></li>
+    <li><a href="https://codepen.io/Sarah_C/pen/jWoEWb">https://codepen.io/Sarah_C/pen/jWoEWb</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist"><a href="tag-css.htm">CSS</a></div>
+
+</body>
+
+</html>
