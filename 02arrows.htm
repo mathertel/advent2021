@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>CSS Arrows</title>
   <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
 
@@ -80,20 +81,20 @@
 
   <p>The <b>pause button</b> is the simplest here. It defines a absolute positioned rectangular element at position 0,0
     and another one a 0.5em to the right.</p>
-  <pre>&lt;span class="pause"&gt;&lt;/span&gt;</pre>
+  <pre><code>&lt;span class="pause"&gt;&lt;/span&gt;</code></pre>
 
   <p>The <b>play button</b> is using a zero-sized element with a border on 2 sides. Without rotation this looks like
     <span class="play" style="transform:none"></span> but with some rotation and scaling (1/sqrt(2)) it works inline.
     <span class="play"></span>.
   </p>
 
-  <pre>&lt;span class="play"&gt;&lt;/span&gt;</pre>
+  <pre><code>&lt;span class="play"&gt;&lt;/span&gt;</code></pre>
 
   <p>The <b>arrow button</b> is combining both. The block in the <code>::before</code> element is rotated with the main
     element and must be rotated back.
   </p>
 
-  <pre>&lt;span class="arrow"&gt;&lt;/span&gt;</pre>
+  <pre><code>&lt;span class="arrow"&gt;&lt;/span&gt;</code></pre>
 
   <p>You ma find examples with a single colon notation like <code>:after</code>. This still works in current browsers
     but CSS3 defined the double colon notation like <code>::after</code> for pseudo elements and use the single colon notation for pseudo-classes like <code>:hover</code>.
@@ -101,9 +102,10 @@
 
   <h2>CSS in use:</h2>
 
-  <pre id="csscode"></pre>
+  <pre id="csscode"><code></code></pre>
   <script>
-    document.querySelector('pre#csscode').textContent = document.querySelector('style').textContent.replace(/^    /mg, "");
+    document.querySelector('pre#csscode code').textContent = document.querySelector('style').textContent
+    .replace(/^    /mg, "").replace(/^\s*\n/, "").replace(/\s+$/, "");
   </script>
 
   <h2>See also</h2>

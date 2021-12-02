@@ -12,10 +12,21 @@ html {
   box-sizing: inherit;
 }
 
+:root {
+  color-scheme: dark light;
+}
+
 body {
   position: relative;
-  margin:0;
+  margin: 0;
   max-width: 800px;
+  background-color: #f7f7f7;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+  }
 }
 
 .back {
@@ -33,14 +44,20 @@ body {
 .back::after {
   position: absolute;
   content: "\274C";
-  left:0;
-  color:white;
-  font-weight:800;
+  left: 0;
+  color: white;
+  font-weight: 800;
 }
 
-pre {padding: 0.2em}
-code {background-color: #eeeecc}
-pre > code { display:block}
+code {
+  background-color: #eeeeaa;
+  color: #222222;
+  padding: 0 0.2em;
+}
+pre > code {
+  display: block;
+  padding: 0.4em;
+}
 
 .taglist > a {
   display: inline-block;
@@ -49,7 +66,7 @@ pre > code { display:block}
   text-align: center;
   padding: 0.2em 0.6em;
   position: relative;
-  margin-left:1em;
+  margin-left: 1em;
   text-decoration: none;
   color: #fff;
 }
