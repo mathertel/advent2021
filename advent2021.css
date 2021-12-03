@@ -66,17 +66,21 @@ pre > code {
   text-align: center;
   padding: 0.2em 0.6em;
   position: relative;
-  margin-left: 1em;
+  margin-right: 1em;
   text-decoration: none;
   color: #fff;
 }
 
 .taglist > a::before {
+  content: "#";
+}
+
+.taglist > a::after {
   content: "";
   border-top: 0.8em solid transparent;
   border-bottom: 0.8em solid transparent;
-  border-right: 0.8em solid #203050;
+  border-left: 0.8em solid #203050;
   position: absolute;
-  left: -0.8em;
+  right: -0.8em;
   top: 0;
 }

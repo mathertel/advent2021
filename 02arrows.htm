@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -34,7 +34,8 @@
       background-color: #203050;
     }
 
-    .play, .arrow {
+    .play,
+    .arrow {
       /* a rotated triangle */
       position: relative;
       display: inline-block;
@@ -70,7 +71,8 @@
     <p>Why use images when CSS can too. How to create simple arrow images in CSS and avoid downloading images.</p>
   </fieldset>
 
-  <p>Pause: <span class="pause"></span> &nbsp;Play: <span class="play"></span> &nbsp;Arrow: <span class="arrow"></span></p>
+  <p>Pause: <span class="pause"></span> &nbsp;Play: <span class="play"></span> &nbsp;Arrow: <span class="arrow"></span>
+  </p>
 
   <h2>How it works</h2>
 
@@ -97,7 +99,8 @@
   <pre><code>&lt;span class="arrow"&gt;&lt;/span&gt;</code></pre>
 
   <p>You ma find examples with a single colon notation like <code>:after</code>. This still works in current browsers
-    but CSS3 defined the double colon notation like <code>::after</code> for pseudo elements and use the single colon notation for pseudo-classes like <code>:hover</code>.
+    but CSS3 defined the double colon notation like <code>::after</code> for pseudo elements and use the single colon
+    notation for pseudo-classes like <code>:hover</code>.
   </p>
 
   <h2>CSS in use:</h2>
@@ -105,7 +108,7 @@
   <pre id="csscode"><code></code></pre>
   <script>
     document.querySelector('pre#csscode code').textContent = document.querySelector('style').textContent
-    .replace(/^    /mg, "").replace(/^\s*\n/, "").replace(/\s+$/, "");
+      .replace(/^    /mg, "").replace(/^\s*\n/, "").replace(/\s+$/, "");
   </script>
 
   <h2>See also</h2>
@@ -113,7 +116,9 @@
   <ul>
     <li><a href="https://freefrontend.com/css-arrows/">https://freefrontend.com/css-arrows/</a></li>
     <li><a href="https://codepen.io/Sarah_C/pen/jWoEWb">https://codepen.io/Sarah_C/pen/jWoEWb</a></li>
-    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements</a></li>
+    <li><a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements</a>
+    </li>
   </ul>
 
   <h2>Tags</h2>

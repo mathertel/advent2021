@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="color-scheme" content="dark light"> -->
+  <title>CSS Dark Mode</title>
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark light;
+    }
+
+    h1 {
+      color-scheme: light;
+    }
+
+    .info-box {
+      padding: 0.4em;
+      border-radius: 0.4em;
+    }
+
+    .simple-warning-box {
+      background-color: bisque;
+      color: darkred;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: Canvas;
+      }
+
+      .noswitch-warning-box {
+        background-color: darkred;
+        color: bisque;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      .noswitch-warning-box {
+        background-color: bisque;
+        color: darkred;
+      }
+    }
+
+    .switch-warning-box {
+      background-color: bisque;
+      color: darkred;
+    }
+
+    .dark-mode body {
+      background-color: Canvas;
+    }
+
+    .dark-mode .switch-warning-box {
+      background-color: darkred;
+      color: bisque;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>CSS Dark Mode</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>The "dark mode" feature is still broken - but you can fix it.</p>
+  </fieldset>
+
+  <div style="border:.1em solid CanvasText;background-color: Canvas; padding:0.2em;position:fixed;left:1em;top:0.2em;">
+    <button onclick="javascript:switchMode('dark light')">default</button>
+    <button onclick="javascript:switchMode('light')">light</button>
+    <button onclick="javascript:switchMode('dark')">dark</button>
+  </div>
+
+  <p>This Calendar door has a long article and was created from a Proof of Concept (POC) implementation from my IoT
+    Open Source project where I need a web frontend implementation for ESP8266 based devices that fits into 1MByte
+    available flash ROM. See my comments at the end of the article.</p>
+
+  <h2>Brief intro</h2>
+
+  <p>In the operating systems Windows, iOS, Android and more the dark-mode feature has been implemented
+    to give the user the option to adapt the applications to their preferences. Actually on LED displays the power
+    consumption is reduced when using a dark background instead of a white one.</p>
+
+  <p>The web browser support this out of the box when you add the following &lt;meta&gt; tag to the page: </p>
+
+  <pre><code>&lt;meta name="color-scheme" content="light dark"&gt;</code></pre>
+
+  <p>or in CSS</p>
+
+  <pre><code>:root {
+  color-scheme: dark light;
+}</code></pre>
+
+  <p>This tells the browser that your page supports the two color-scheme modes light and dark and that light is
+    preferred.</p>
+
+  <p>As long as you do not have fixed colors in your CSS that's all you have to do and it works well. That is what you
+    see on this side.</p>
+
+
+  <h2>Switch on the page</h2>
+
+  <p>
+    The common known switch for the color-scheme is embedded in the operating system or the browser settings.
+    By using the <code>document.documentElement.style.colorScheme</code> property you can change the color-scheme mode
+    on the
+    page. Here is a short script for demonstration that is also included in this page:</p>
+
+  <pre><code>&lt;button onclick=&quot;javascript:switchMode('dark light')&quot;&gt;default&lt;/button&gt;
+  &lt;button onclick=&quot;javascript:switchMode('light')&quot;&gt;light&lt;/button&gt;
+  &lt;button onclick=&quot;javascript:switchMode('dark')&quot;&gt;dark&lt;/button&gt;
+
+  &lt;script&gt;
+    function switchMode(colScheme) {
+      document.documentElement.style.colorScheme = colScheme;
+    };
+  &lt;/script&gt;</code></pre>
+
+  <p>You can see and try the switches in action located fixed at the top of the window.</p>
+
+
+  <h2>Define fixed colors in CSS</h2>
+
+  <p>This approach is quiet simple and can be used even with inline styling rules as we choose colors that fit
+    into the light and the dark mode like the warning above. The Warning box below will stay in the defined colors but
+    actually works in both modes.</p>
+
+  <pre><code>.simple-warning-box {
+  background-color:bisque;
+  color:darkred;
+}</code></pre>
+
+  <div class="info-box simple-warning-box">
+    Problem:</b> Only the Operating system / Browser settings based color-scheme information is available to CSS.
+    It is not possible (out of the box) to define CSS rules based on the effective color-scheme.
+  </div>
+
+
+  <h2>Define adaptive colors in CSS (no switch)</h2>
+
+  <p>This approach is is based on the fact that the @media rules can be used to show different colors dependant on the
+    user preferences in the OS / Browser settings. Here we can ask for
+
+  <pre><code>@media (prefers-color-scheme: dark) {
+  .noswitch-warning-box {
+    background-color: darkred;
+    color: bisque;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .noswitch-warning-box {
+    background-color: bisque;
+    color: darkred;
+  }
+}</code></pre>
+
+  <div class="info-box noswitch-warning-box">
+    <p><b>Problem:</b>Only the Operating system / Browser settings based color-scheme information is available to CSS.
+      It is not possible (out of the box) to define CSS rules based on the effective color-scheme.</p>
+  </div>
+
+  <p>When you switch the mode in the operating system you will see that the CSS rules apply correctly but when you use
+    the switches on top of the page - they are not reflected.</p>
+
+  <p>This is the broken link. The CSS rules available out-of the box do not fit to the also available API through
+    <code>document.documentElement.style.colorScheme</code>.
+  </p>
+
+
+  <h2>Define adaptive colors in CSS (switchable)</h2>
+
+  <p>There are workarounds for this and some descriptions and implementations in the wild can been found. This cannot be
+    implemmented
+    with inline CSS because there we cannot define rules with @media or root-class dependencies. This also needs some
+    JavaScript to capture events and set a class or attribute on a root element.</p>
+
+  <ul>
+    <li>On page load create a class or attribute on the html element that corresponds to the preferred color scheme.
+    </li>
+    <li>make CSS rules reflecting this class or attribute.</li>
+    <li>Optional define CSS variables for the site-theme based o the class or attribute.</li>
+    <li>register for changes based on the switch buttons</li>
+    <li>register for changes based on the prefers-color-scheme</li>
+  </ul>
+
+  <p>I use the class name 'dark-mode' here I apply to the root element when dark-mode is wanted. This doesn't work
+    without JavaScript as of now so here is the code for this.</p>
+
+  <pre><code>// called on page load, by the switch buttons and on prefers-color-scheme changes.
+function switchMode(colScheme) {
+  if (colScheme === 'light') {
+    document.documentElement.style.colorScheme = 'light';
+    document.documentElement.classList.remove('dark-mode');
+  } else if (colScheme === 'dark') {
+    document.documentElement.style.colorScheme = 'dark';
+    document.documentElement.classList.add('dark-mode', true);
+  } else {
+    document.documentElement.style.colorScheme = 'dark light';
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle('dark-mode', isDarkMode);
+  }
+};
+
+// register events to switchMode
+window.addEventListener("load", switchMode);
+window.matchMedia("(prefers-color-scheme: dark)").addListener(switchMode);
+</code></pre>
+
+  <pre><code>.switch-warning-box {
+  background-color: bisque;
+  color: darkred;
+}
+
+:root.dark-mode .switch-warning-box {
+  background-color: darkred;
+  color: bisque;
+}</code></pre>
+
+
+  <div class="info-box switch-warning-box">
+    Problem:</b> Only the Operating system / Browser settings based color-scheme information is available to CSS.
+    It is not possible (out of the box) to define CSS rules based on the effective color-scheme.
+  </div>
+
+  <p>Press <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
+    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
+    to view the complete source code of this page implementation.</p>
+
+  <h2>My Comments</h2>
+
+  <p>My personal decission was not to implement a switch on the page level but to use the built-in dark mode
+    using the CSS rule <code>:root { color-scheme: dark light; }</code>
+    because a switch element creates more complexity than it adds value.
+    Here is a PoC if you need it.</p>
+
+  <p>As of implementing this PoC I found the trick to capture the preferred mode and save it into a classname to
+    make it available to CSS rules something the browser should have done automatically.</p>
+
+  <p>I believe that things may be implemented smarter than this one and I suggest to have a selector rule like
+    <code>[color-scheme='dark']</code> that corresponds to setting
+    <code>document.documentElement.style.colorScheme</code> or maybe <code>document.documentElement.colorScheme</code>
+    and inheriting it to child objects. Also setting manually the mode on a object level by overwriting the
+    inherited one like <code>&lt;div style="color-scheme:dark"&gt;</code> is a wish.
+  </p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://www.w3.org/TR/css-color-adjust-1/">https://www.w3.org/TR/css-color-adjust-1/</a></li>
+    <li><a href="https://web.dev/color-scheme/">https://web.dev/color-scheme/</a></li>
+    <li><a href="https://color-scheme-demo.glitch.me/">https://color-scheme-demo.glitch.me/</a></li>
+    <li><a
+        href="https://www.codewithrandom.com/2021/11/css-dark-mode-toggle-dark-light-toggle.html">https://www.codewithrandom.com/2021/11/css-dark-mode-toggle-dark-light-toggle.html</a>
+    </li>
+    <li><a
+        href="https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web">https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web</a>
+    </li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+  <script>
+    // called on page load, by the switch buttons and on prefers-color-scheme changes.
+    function switchMode(colScheme) {
+      if (colScheme === 'light') {
+        document.documentElement.style.colorScheme = 'light';
+        document.documentElement.classList.remove('dark-mode');
+      } else if (colScheme === 'dark') {
+        document.documentElement.style.colorScheme = 'dark';
+        document.documentElement.classList.add('dark-mode', true);
+      } else {
+        document.documentElement.style.colorScheme = 'dark light';
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle('dark-mode', isDarkMode);
+        document.documentElement.style.colorScheme = isDarkMode ? 'dark' : 'light';
+      }
+    };
+
+    // register events to switchMode
+    window.addEventListener("load", switchMode);
+    window.matchMedia("(prefers-color-scheme: dark)").addListener(switchMode);
+  </script>
+
+</body>
+
+</html>

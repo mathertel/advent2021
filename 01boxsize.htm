@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -25,10 +25,8 @@
 
   <p>The <b>content-box</b> was created first and the calculation is given by</p>
 
-  <pre><code>
-Total width = object width + padding left + padding right + border left + border right;
-Total height = object height + padding top + padding bottom + border top + border bottom;
-</code></pre>
+  <pre><code>Total width = object width + padding left + padding right + border left + border right;
+Total height = object height + padding top + padding bottom + border top + border bottom;</code></pre>
 
   <p>The problem with this model is that specifying the height is not actually specifying the height. I found it somehow
     un-normal.
@@ -41,10 +39,8 @@ Total height = object height + padding top + padding bottom + border top + borde
   <p>The <b>border-box</b> was created in about 2012 and was adopted in browsers since then and calculation is given by
   </p>
 
-  <pre><code>
-Total width = object width;
-Total height = object height;
-</code></pre>
+  <pre><code>Total width = object width;
+Total height = object height;</code></pre>
 
   <p>Quite simple. The border and padding is included inside the the specified width and height.</p>
 
@@ -54,15 +50,13 @@ Total height = object height;
 
   <p>To set the box sizing model on a global level the following CSS can be used:</p>
 
-  <pre><code>
-html {
+  <pre><code>html {
   box-sizing: border-box;
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
-}
-</code></pre>
+}</code></pre>
 
   <p>This allows converting to the content-box model on a HTML container element in case you need to.</p>
 
