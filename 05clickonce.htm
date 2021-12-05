@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Submit button with spinner animation</title>
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+
+  <style>
+    button {
+      position: relative;
+      min-width: 5em;
+    }
+
+    button:disabled.wait::after {
+      content: "";
+      position: absolute;
+      height: 1.2em;
+      width: 1.2em;
+      left: 50%;
+      top: 50%;
+      border: 0.2em solid #203050;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      animation: 1.5s linear infinite turn;
+    }
+
+    @keyframes turn {
+      0% {
+        transform: translate(-50%, -50%) rotate(0turn);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(1turn);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Submit button with spinner animation</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p> Clicking a button that starts a service call to the background may not be activated more that once until the
+      call has finished and the result is available.</p>
+  </fieldset>
+
+  <p>
+    When clicks in a web applications are used to trigger processes on the backend using service requests from the
+    browser (aka. AJAX calls) some implementation is required to create a solid implementation.</p>
+
+  <ul>
+    <li>Animations of a spinning object are often used as a hint to the user that something is "working".</li>
+    <li>I would prefer progress indicators but often the calling duration is not predictable or only has a long duration
+      in case of network packet drops.</li>
+    <li>Disabling the button or link as soon as possible is often implemented to prevent double clicking and preventing
+      calling the backend service twice by accident.</li>
+    <li>AJAX calls must have a timeout because the user is not willing to wait > 8 secs. even if the network will do
+      retries. This involves some the tricky parts on the server as well and is beyond this text and implementation
+      here.</li>
+  </ul>
+
+  <p>This button is simulating a 3 sec. lasting background call.
+    The only thing the client side scripting needs to do is to set the button to disabled. There is no need to
+    include animated gif files or implement JavaScript for the animation.
+    The mechanism is built using <b>pure CSS - no image, no animated GIF, no SVG tricks.</b></p>
+
+  <p><button id="sim" class="wait">Click-me</button></p>
+
+  <h2>How it works</h2>
+
+  <p>This button has 3 states implemented by pure CSS:</p>
+  <ul>
+    <li><b>default</b> - The button can be clicked.</li>
+    <li><b>disabled</b> - The button is blocked , cannot be clicked.</li>
+    <li><b>wait</b> - The button shows an animation that something is processing.</li>
+  </ul>
+
+  <p><button>Start</button> <button disabled>Disabled</button> <button disabled class="wait">Wait</button></p>
+
+  </p>
+
+  <h3>Default state</h3>
+
+  <p>The default state of the button is unchanged. The only noticeable and required CSS attribute is
+    <code>position:relative</code> to enable positioning the spinner on top of the button in the center.
+  </p>
+
+  <h3>Disabled state</h3>
+
+  <p>To disable the button so it cannot be clicked again the <code>disabled</code> attribute on the button object is
+    used. This will show the button using in the <code>:disabled</code>
+    mode.
+  </p>
+
+  <h3>Wait state</h3>
+
+  <p> This state is activated by applying the <code>wait</code> class to the button. it is used in combination with the
+    <code>:disabed</code> CSS rule so the class can be applied permanently.
+    By the CSS rule <code>button:disabled.wait</code> the spinner is added using the <code>::after</code> selector</p>
+  <p> It is a rectangular object with border radius 50% to create a circle. 3/4 of the border is actually shown
+    everything else is
+    transparent.
+  </p>
+  <p>To make it spinning an infinitive animation is added rotating once per 1.5 seconds.</p>
+
+  <p>Press <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
+    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
+    to view the source code.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://www.w3docs.com/snippets/css/how-to-create-loading-spinner-with-css.html">
+      https://www.w3docs.com/snippets/css/how-to-create-loading-spinner-with-css.html
+    </a></li>
+  </ul>
+  <hr>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+<script>
+    // Promise to simulating a call to the background that takes a while
+    function DelayPromise(ms) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(resolve, ms);
+      });
+    }
+
+    document.querySelector('#sim').addEventListener('click', evt => {
+      /** @type HTMLButtonElement */
+      const scope = evt.target;
+
+      scope.disabled = true;
+
+      DelayPromise(3000)  // give some time to display progress stuff
+        .then(function () {
+          scope.disabled = false;
+        });
+    });
+  </script>
+
+</body>
+
+</html>
