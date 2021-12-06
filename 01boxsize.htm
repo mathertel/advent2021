@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>Box sizing model</title>
+  <meta name="description" content="How to choose the right box sizing model.">
   <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
 </head>
 
@@ -61,25 +62,35 @@ Total height = object height;</code></pre>
   <p>This allows converting to the content-box model on a HTML container element in case you need to.</p>
 
 
-  <h3>Always border-box model ?</h3>
+  <h2>My Comments</h2>
+  
+  <p>Always border-box model ?</p>
 
   <p>Not so fast.
     There is still some dependency and the content-box model is helpful when specifying text containing elements. Here
-    is
-    an example of a button implementation with such a problem:</p>
+    is an example of a button implementation with such a problem:</p>
 
   <pre><code>&lt;button style="height:1em;font-size:1em;line-height:1em"&gt;Click me&lt;/button&gt;</code></pre>
 
   <p><button style="height:1em;font-size:1em;line-height:1em">Click me</button></p>
 
   <p>When enforcing a specific height (or width) the available space for the text depends on the given border and
-    padding.
-    Using the content-box on these elements is simplifying this inner-out requirement. When using a flex layout the
-    outer-in model fits better.</p>
-  <p>Because the object margins are not included you still have the chance to get layout problems based on this and the
+    padding. Using the content-box model on these elements is simplifying this inner-out requirement. When using a flex
+    layout the outer-in model fits better.</p>
+
+    <p>Because the object margins are not included you still have the chance to get layout problems based on this and the
     border-box model is not helping here.</p>
 
-  <p>My (personal) preference is to use the border-box model and not to use borders at all. But there are buttons...</p>
+  <p>My (personal) preference and advice is to use the border-box model on all HTML elements used as controls
+    like data input and output elements and the elements used next to them like buttons and labels.</p>
+  <p>Also pure formatting html elements like grids work better in this model.</p>
+
+  <p>On the other side there are elements that contain text content. You usually cannot predict their height especially
+    in responsive design.
+    Here I prefer the content-box model but avoid using borders.</p>
+
+
+  But there are buttons...</p>
 
   <h2>See also</h2>
 
