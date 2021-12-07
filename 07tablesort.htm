@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>How to implement sortable tables using a Web Component</title>
+  <meta name="description" content="How to sort HTML tables using a JavaScript Web Component.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <script src="tablesort.js"></script>
+  <style>
+    .dataTab {
+      border-collapse: collapse;
+      background-color: white;
+      border: solid 1px #203050;
+      padding: 0;
+      color: #203050;
+    }
+
+    .dataTab tr:nth-child(even) {
+      background: #ddd
+    }
+
+    .dataTab tr:nth-child(odd) {
+      background: #eee
+    }
+
+    .dataTab td,
+    .dataTab th {
+      border: solid 1px #203050;
+      padding: 0.25em 0.8em;
+    }
+
+    .dataTab thead th {
+      background-color: #203050;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Sortable Tables using a WebControl</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Add one attribute to the HTML table to add the sorting feature.</p>
+  </fieldset>
+
+  <p>This is an example on how simple it is to use the native web component technology to make html tables sortable.</p>
+
+  <ol>
+    <li>
+      <p>Add a javascript include to the page header:</p>
+      <pre><code>&lt;script src="tablesort.js"&gt;&lt;/script&gt;</code></pre>
+      <p>This script file includes all the functionality in 66 lines of code. No full&perfect implementation
+        but easy to read with comments inside.</p>
+
+    </li>
+    <li>
+      <p>Add a annotation to the table element:</p>
+      <pre><code>&lt;table is="table-sortable" ... &gt;</code></pre>
+      <p>This tells the browser to extend the functionality of the HTML element.
+        The <code>is</code> attribute is reserved in HTML for this purpose.</p>
+    </li>
+  </ol>
+
+  <h2>Example</h2>
+
+  <body>
+    <table is="table-sortable" class="dataTab">
+      <thead>
+        <tr>
+          <th sort>id</th>
+          <th sort>web site</th>
+          <th sort>purpose</th>
+          <th sort>online</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>amazon</td>
+          <td>shopping</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>google</td>
+          <td>searching</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>outlook</td>
+          <td>E-Mail</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>eBay</td>
+          <td>commerce</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>example</td>
+          <td>dummy</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+  <h2>How it works</h2>
+
+  <p>The script file contains a javascript class definition that the browser loads to extend the existing HTML object
+    model.
+    Here a sub-classing of the HTMLTableElement is implemented that captures clicks on a table header element.</p>
+  <p>In the last line this class is added to the browser as a custom Element that extends the table element:</p>
+  <pre><code>customElements.define('table-sortable', TableSortable, { extends: 'table' });</code></pre>
+
+  <p>A click on a header cell starts building a temporary list of the and sorts them in ascending order.
+    Click on different header cells to see the effect.
+  </p>
+
+  <p>Press <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
+    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
+    to view the source code.</p>
+
+  <p>Open <a href="tablesort.js">tablesort.js</a> to see the script of the class.</p>
+
+
+  <h2>See also</h2>
+  <ul>
+    <li><a
+        href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">https://developer.mozilla.org/en-US/docs/Web/Web_Components</a>
+    </li>
+  </ul>
+
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+ 
+</body>
+
+</html>
+<style>
+</style>
+</head>
+
+
+
+</html>
