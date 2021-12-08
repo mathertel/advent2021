@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Show Tags as Tags</title>
+  <meta name="description" content="How to use CSS to format tag-links tags.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <h1>Show Tags as Tags</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Why use images when CSS can too. Part 2.
+  </fieldset>
+
+  <p>
+    Tags are widely used to classify content. Most of the implementations are using links to show them
+    to the user and a click on a tag can be used for listing all content with the same classification (tag).</p>
+
+  <p>
+    In this Advent Calendar implementation 3 classifications are provided for the tags you see below. On every page the
+    relevant tags are added as well. Usually the collections of pages with the same tag can be created automatically by
+    the CMS system. Here a static html file is used for simplification.
+  </p>
+
+  <p>Here you find a small CSS that formats links inside a <code>div.taglist</code> container as tags.</p>
+
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+    <a href="tag-js.htm">JavaScript</a>
+    <a href="tag-reading.htm">Reading</a>
+  </div>
+
+  <pre><code>&lt;div class="taglist"&gt;
+  &lt;a href="tag-css.htm"&gt;CSS&lt;/a&gt;
+  &lt;a href="tag-js.htm"&gt;JavaScript&lt;/a&gt;
+  &lt;a href="tag-html.htm"&gt;HTML&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2>How CSS works</h2>
+
+  <p>The link elements will rendered as inline blocks to have a rectangular object with the link text inside.</p>
+  <p>To add the `#` in front of the tag text a ::before element bringing this character is added in CSS.</p>
+  <p>To make the link like a tag a small triangle is added in the ::after pseudo element.</p>
+  <p>Padding and margin are adjusted to get a good position of the text and the space between tags.</p>
+  <p>Here is the CSS code:</p>
+
+  <pre><code>.taglist > a {
+    display: inline-block;
+    height: 1.6em;
+    background: #203050;
+    text-align: center;
+    padding: 0.2em 0.6em;
+    position: relative;
+    margin-right: 1em;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .taglist > a::before {
+    content: "#";
+  }
+  
+  .taglist > a::after {
+    content: "";
+    border-top: 0.8em solid transparent;
+    border-bottom: 0.8em solid transparent;
+    border-left: 0.8em solid #203050;
+    position: absolute;
+    right: -0.8em;
+    top: 0;
+  }
+}</code></pre>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
