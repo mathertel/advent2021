@@ -32,21 +32,16 @@ body {
 .back {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 0;
   width: 2rem;
   height: 2rem;
-  font-size: 1.4rem;
   background-color: red;
+  background-size: 2rem 2rem;
+  background-repeat: no-repeat;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M12 12L36 36M36 12L12 36' fill='none' stroke='white' stroke-width='12' stroke-linecap='round' /></svg>");
   user-select: none;
   cursor: pointer;
-}
-
-.back::after {
-  position: absolute;
-  content: "\274C";
-  left: 0;
-  color: white;
-  font-weight: 800;
 }
 
 code {
