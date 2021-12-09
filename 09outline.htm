@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Outline and Box-shadows</title>
+  <meta name="description" content="How to use the CSS Outline and Box-shadows.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    *:focus {
+      box-shadow: 0 0 0.6rem 0.4rem pink
+    }
+        </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Outline and Box-shadows</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>CSS offers several options for borders around HTML elements.</p>
+  </fieldset>
+
+  <p>As already seen in door <a href="01boxsize.htm">#1</a> HTML Elements have different "layers" around the read
+    content.</p>
+
+  <p>[content] -> [padding] -> [border].</p>
+
+  <p>There are 2 more layers that do not calculate in width and height.</p>
+
+  <h2>Outline</h2>
+
+  <p>The outline is a layer around the border that will eventually overlap other content.</p>
+
+  <pre>&lt;span style="outline:.5rem solid lime;"&gt;( text here )&lt/span&gt;</pre>
+
+  <span style="outline:.5rem solid lime">( text here )</span>
+
+  <p>It can be used for several purpose. One is to provide a 2 color border by combining it with a regular border. By
+    using a margin with the same width the element will not overlap.</p>
+
+  <pre>&lt;span style="border:orange 2px solid;margin:.5rem;outline:.5rem solid yellow"&gt;( text here )&lt;/span&gt;</pre>
+
+  <span style="border:orange 2px solid;margin:.5rem;outline:.5rem solid yellow">( text here)</span>
+
+
+  <h2>Box shadow</h2>
+
+  <p>The box shadow is a layer around the border that will eventually overlap other content.</p>
+
+  <pre>&lt;span style="box-shadow: 0 0 0.6rem 0.4rem #4466ee"&gt;HERE WE ARE&lt;/span&gt;</pre>
+
+  <span style="box-shadow: 0 0 0.6rem 0.4rem #4466ee">HERE WE ARE</span>
+
+  <p>It has almost the same effect but more options like asymmetric positioning by shifting the rectangle using the
+    first 2 parameters.</p>
+  <p>The 3. parameter is specifying a with where the color is fading o complete transparent at the outside.</p>
+  <p>The 4. optional parameter is specifying a with where the color is used in the solid version.</p>
+  <p>The 5. parameter is specifying the color to be used.</p>
+  <p>Again it can be combined with a margin to allow flowing the element on the boundaries.</p>
+
+  <pre>&lt;span style="display:inline-block;margin:1rem;box-shadow: 0 0 0.6rem 0.4rem #4466ee"&gt;(no overlap on other
+    elements)&lt;/span&gt;</pre>
+
+  <span style="display:inline-block;margin:1rem;box-shadow: 0 0 0.6rem 0.4rem #4466ee">(no overlap on other
+    elements)</span>
+
+  <p>The box shadow effect can often be seen to highlight the html element with the focus by using a CSS rule like the
+    following one that is also included in this pages source code:</p>
+
+  <pre>
+&lt;style&gt;
+  *:focus {
+    box-shadow: 0 0 0.6rem 0.4rem pink
+  }
+&lt;/style&gt;
+</pre>
+
+
+  <h2>Combination</h2>
+
+  <p>To combine all these effects a 3-color border can be created:</p>
+  <ul>
+    <li>outer color: box shadow</li>
+    <li>middle color: outline</li>
+    <li>inner color: border </li>
+  </ul>
+
+  <pre><code>&lt;span style="margin:3rem;padding:0.4rem;display:inline-block;
+  box-shadow: 0 0 0 0.8rem black;
+  outline: 0.4rem solid red;
+  border: 0.4rem solid gold;
+  "&gt;(German Style)&lt;/span&gt;
+&lt;span style="margin:3rem;padding:0.4rem;display:inline-block;
+  box-shadow: 0 0 0 0.8rem green;
+  outline: 0.4rem solid white;
+  border: 0.4rem solid red;
+  "&gt;(Italian Style)&lt;/span&gt;</code></pre>
+
+  <span style="margin:3rem;padding:0.4rem;display:inline-block;
+box-shadow: 0 0 0 0.8rem black;
+outline: 0.4rem solid red;
+border: 0.4rem solid gold;
+">(German Style)</span>
+  <span style="margin:3rem;padding:0.4rem;display:inline-block;
+box-shadow: 0 0 0 0.8rem green;
+outline: 0.4rem solid white;
+border: 0.4rem solid red;
+">(Italian Style)</span>
+
+  <p>As you can see the box shadow and outline both start outside the border but the outline is in front of the
+    box-shadow. So box-shadow must be thicker than outline.</p>
+
+  <h2>See also</h2>
+
+  <ul>
+    <li><a href="https://moderncss.dev/the-3-css-methods-for-adding-element-borders/">https://moderncss.dev/the-3-css-methods-for-adding-element-borders/</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>

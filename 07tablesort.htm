@@ -117,27 +117,24 @@
   <h2>How it works</h2>
 
   <p>The script file contains a javascript class definition that the browser loads to extend the existing HTML object
-    model.
-    Here a sub-classing of the HTMLTableElement is implemented that captures clicks on a table header element.</p>
+    model. Here a sub-classing of the HTMLTableElement is implemented that captures clicks on a table header element.</p>
   <p>In the last line this class is added to the browser as a custom Element that extends the table element:</p>
   <pre><code>customElements.define('table-sortable', TableSortable, { extends: 'table' });</code></pre>
 
   <p>A click on a header cell starts building a temporary list of the and sorts them in ascending order.
-    Click on different header cells to see the effect.
+    Click on different header cells to see the effect.</p>
+
+  <p>The source code of this page and the script can be found on Github in
+  <ul>
+    <li><a href="https://github.com/mathertel/advent2021/blob/master/07tablesort.htm">07tablesort.htm</a> - this page</li>
+    <li><a href="https://github.com/mathertel/advent2021/blob/master/tablesort.js">tablesort.js</a> - source code of the custom element</li>
+    <li>... or use the built-in developer tools to inspect this page source code.</li>
+  </ul>
   </p>
-
-  <p>Press <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
-    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
-    to view the source code.</p>
-
-  <p>Open <a href="tablesort.js">tablesort.js</a> to see the script of the class.</p>
-
 
   <h2>See also</h2>
   <ul>
-    <li><a
-        href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">https://developer.mozilla.org/en-US/docs/Web/Web_Components</a>
-    </li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">https://developer.mozilla.org/en-US/docs/Web/Web_Components</a></li>
   </ul>
 
 
@@ -145,14 +142,7 @@
   <div class="taglist">
     <a href="tag-js.htm">JavaScript</a>
   </div>
- 
+
 </body>
-
-</html>
-<style>
-</style>
-</head>
-
-
 
 </html>
