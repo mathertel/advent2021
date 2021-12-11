@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Make your tables striped</title>
+  <meta name="description" content="Using css rules for odd/even table row formatting.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Make your tables striped</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>even/odd formats for text lines is best practice since long ago using colored paper.</p>
+  </fieldset>
+
+  <p>There is more value in the in the <a href="07tablesort.htm">tablesort example from day 7</a>.
+    When opening the page source code you can find some CSS that uses rules for even and odd rows with slightly different background colors.</p>
+
+    <pre><code>.dataTab tr:nth-child(even) {
+  background: #ddd
+}
+
+.dataTab tr:nth-child(odd) {
+  background: #eee
+}
+</code></pre>
+
+  <p>This I have not recognized for a long time and the options in the <code>:nth-child()</code>
+    selector are complex but powerfull. The keywords <code>even</code> and <code>odd</code> can also be used.</p>
+
+  <p>I searched multiple and therefore so I added it to my personal snippet library and now
+    to the advent calender as well.</p>
+
+  <p>No need to use JavaScript for this any more. All browsers support these rules.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="07tablesort.htm">Sortable Tables using a WebControl</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
