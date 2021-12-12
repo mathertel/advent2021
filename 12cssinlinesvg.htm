@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>SVG used for icons</title>
+  <meta name="description" content="How to use SVG for icon use-cases.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    body img , body svg {
+      border: 2px solid #203050
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>SVG used for icons</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Why use images for icons when CSS + SVG can too. Part 3.
+  </fieldset>
+
+
+  <h2>Why use images for icons at all ?</h2>
+
+  <p>I have seen in many places this year the advice to not use pixel based images or fonts any more for symbols and icons.
+    Reasons behind this general shift: size, number of download and smooth sizing.</p>
+  <p>SVG seems to be the better choice.</p>
+
+  <p>Regarding the size, caching is a quiet useful option that reduces repeated downloads of static content and this is also true for SVG files.</p>
+  <p>Here I compare the methods of using SVG integration as there are multiple options but no one-fits-all.</p>
+
+  <h3>PNG images</h3>
+
+  <p>Using the PNG image format is best when using pixel based icons
+    as they can be optimized in size very well and do not have visual artifacts
+    like jpg images. But of course they do not scale smoothly as they are pixel based.</p>
+
+  <pre><code>&lt;img src="check.png" style="width:48px;height:48px" /&gt;</code></pre>
+  <img src="check.png" style="width:48px;height:48px" />
+
+  <p>54 bytes are required to implement the minimal img element in html
+    and another request to the server is required to get the 774 bytes of the image.
+    The size alone is not the problem in this case as it very small but the second request is taking time.</p>
+
+  <p>Also all colors are defined inside the PNG file and not in the CSS.</p>
+
+
+  <h3>SVG as images</h3>
+
+  <p>Just switching to the SVG format results in img tags referencing to a SVG file.</p>
+
+  <pre><code>&lt;img src="check.svg"&gt;</code></pre>
+  <p><img src="check.svg" alt=""></p>
+
+  <p>The advantage is the smaller size but also scaling it up will result in good quality. Just zoom in the browser to see the difference.</p>
+
+  <p>Also all colors are defined inside the SVG file and not in the CSS.</p>
+
+
+  <h3>SVG inline</h3>
+
+  <p>SVG integrates also directly into HTML elements as a inline-block element so no second download is required.</p>
+
+  <p>This approach allows even using the colors from the surrounding html into the svg e. g. by specifying <code>currentColor</code> as a color on the svg element to use the current text color.
+
+
+
+  <pre><code>&lt;p style="color:red"&gt;
+  &lt;svg viewBox="0 0 48 48" style="height:48px;width:48px"&gt;
+    &lt;path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"
+      d="M8 24l10 12L40 12"&gt;&lt;/path&gt;
+  &lt;/svg&gt;
+&lt;/p&gt;</code></pre>
+
+  <p style="color:red">
+    <svg viewBox="0 0 48 48" style="height:48px;width:48px">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M8 24l10 12L40 12"></path>
+    </svg>
+  </p>
+
+  <p> On the opposite side it is hard to maintain inline svg code that is used in many places. Frameworks that compose html by html fragments can help but there are more options...</p>
+
+  <h2>SVG referenced</h2>
+
+  <p>SVG offers the feature to define elements in a central place and to use them by references. The definition can be inside the HTML or in a separate file.</p>
+
+  <p>The central definition is using the <code>symbol</code> element inside a SVG definition similar to a standalone SVG file.</p>
+
+
+  <pre><code>&lt;symbol id="add" viewBox="0 0 48 48"&gt;
+  &lt;path fill="currentColor" d="M8 4C5.784 4 4 5.784 4 8v32c0 2.216 1.784 4 4 4h32c2.216 0 4-1.784 4-4V8c0-2.216-1.784-4-4-4zm2 4h28c1.108 0 2 .892 2 2v28c0 1.108-.892 2-2 2H10c-1.108 0-2-.892-2-2V10c0-1.108.892-2 2-2z"/&gt;&lt;path fill="currentColor" d="M22 14v8h-8v4h8v8h4v-8h8v-4h-8v-8h-4z"/&gt;
+&lt;/symbol&gt;
+</code></pre>
+
+  <p>A SVG example of such a file can be found
+    <a href="https://github.com/HomeDing/WebFiles/blob/master/icons.svg?short_path=ee30f12">here</a>
+    containing a lot of symbols / icons for IoT devices.
+  </p>
+
+  <p>To use the icon a use tag inside the svg <code>use</code> element has to be used.</p>
+
+  <pre><code>&lt;svg class="icon"&gt;&lt;use href="./icons.svg#add" /&gt;&lt;/svg&gt;</code></pre>
+
+  <p>This approach fits good for use-cases where many icons are used in many places as the definition taking the most size is only loaded once.</p>
+
+
+  <h3>SVG data</h3>
+
+  <p>This is a variation of the SVG file referenced in the <code>img</code> tag so a second request to the server
+    is avoided by adding the svg code directly using a data link.</p>
+
+  <p>It can be base64 encoded but svg can also be used directly when quotes are not used.</p>
+
+  <pre><code>&lt;img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0i ...&lt;cut out&gt;... Lz48L3N2Zz4=" /&gt;</code></pre>
+
+  In CSS svg data based images can be used as background images:
+
+  <pre><code>.back {
+  background-image:
+    url("data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'&gt;&lt;path d='M12 12L36 36M36 12L12 36' fill='none' stroke='white' stroke-width='12' stroke-linecap='round' /&gt;&lt;/svg&gt;");
+}</code></pre>
+
+  <img
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6IzkwZWU5MCI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNiIgZD0iTTggMjRsMTAgMTIgMjItMjQiLz48L3N2Zz4=" />
+
+  <p>This is not much of use inside HTML and takes more space than the SVG tag used directly
+    but it is an option to include a SVG image in CSS as it is done with the red close symbol at the top.</p>
+
+  <h2>Summary</h2>
+
+  <p>There is no <b>best</b> solution that fits into all use-cases. Here is the summary in a table.</p>
+
+  <table border=1 style="border-collapse: collapse;">
+    <tr>
+      <th>Format</th>
+      <th>inline sizes</th>
+      <th>extra download size</th>
+      <th>use-cases</th>
+    </tr>
+    <tr>
+      <td>PNG file</td>
+      <td>54 bytes</td>
+      <td>774 bytes</td>
+      <td>This is the 'old style' for icons.</td>
+    </tr>
+    <tr>
+      <td>SVG file</td>
+      <td>54 bytes</td>
+      <td>221 bytes</td>
+      <td>A direct replacement for the 'old style' using less bytes and scalable.</td>
+    </tr>
+    <tr>
+      <td>SVG inline</td>
+      <td>275 bytes</td>
+      <td>0</td>
+      <td>best for rarely used symbols.</td>
+    </tr>
+    <tr>
+      <td>SVG referenced.</td>
+      <td>55 bytes</td>
+      <td>221 bytes in shared download</td>
+      <td>best option when many icons are used many times.</td>
+    </tr>
+    <tr>
+      <td>SVG in data source</td>
+      <td>336 bytes</td>
+      <td>0</td>
+      <td>usable in CSS.</td>
+    </tr>
+  </table>
+
+
+  <h2>See also</h2>
+
+  <ul>
+    <li><a href="https://cloudfour.com/thinks/svg-icon-stress-test/">https://cloudfour.com/thinks/svg-icon-stress-test/</a></li>
+    <li><a href="https://github.com/HomeDing/WebFiles/blob/master/icons.svg?short_path=ee30f12">https://github.com/HomeDing/WebFiles/icons.svg?short_path=ee30f12</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
