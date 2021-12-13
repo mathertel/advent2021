@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>CSS Variables and Properties</title>
+  <meta name="description" content="CSS Variables and Properties are supported by browser.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    :root {
+      /* The :root element is on the <html> */
+      --back-color: yellow;
+    }
+
+    body {
+      --back-color: pink;
+    }
+
+    .card {
+      --back-color: lime;
+      border: 2px dashed gray;
+      padding: 0.4em;
+    }
+
+    .demo {
+      margin: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>CSS Variables and Properties yet</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>More programming in CSS.</p>
+  </fieldset>
+
+  <p>I love SCSS as a CSS language that is adding some syntax to the well known CSS.
+    However all functions are evaluated and all variables are resolved to constants in the compiled result.
+    Changing a SCSS variable at runtime is not working becaus all is limited to the capabilities of CSS.</p>
+
+  <p>With the CSS variables (I call them variables because of the <code>var()</code> function)
+    it is possible to change the value of a variable
+    that will be then applied to the defined CSS rules where the variable is referred.</p>
+
+  <h2>How it works</h2>
+
+  <p>The interesting thing about the CSS variable is that they can be defined on the root and can be
+    overwritten by elements. The closes parent element that holds a value on that variable will define the actual value.
+  </p>
+
+  <p>The feature is also available on inline style on HTML Elements.</p>
+
+  <h3>CSS definition</h3>
+
+  <p>The CSS definition in the <code>&lt;style&gt;</code> tag in the page header is defining the following rules
+    (excerpt):</p>
+  <pre><code>:root {
+  --back-color: yellow;
+}
+
+body {
+  --back-color: pink;
+}
+
+.card {
+  --back-color: lime;
+}</code></pre>
+
+  <h3>HTML Elements</h3>
+
+  <p>This is a <code>&lt;div&gt;</code> element inside the body using <code>background-color: var(--back-color)</code>.
+    It results in pink as the yellow on the root element is overwritten by the more closer rule on the
+    <code>&lt;body&gt;</code> element.
+  </p>
+
+  <div class="demo" style="background-color: var(--back-color);">div element using --back-color</div>
+
+  <p>This is a <code>&lt;div&gt;</code> element inside a <code>.card</code> element
+    also using <code>background-color: var(--back-color)</code>.
+    It results in a lime background as the yellow and pink on the <code>&lt;html&gt;</code> and
+    <code>&lt;body&gt;</code> is overwritten
+    by the .card rule on the <code>.card</code> element.
+  </p>
+
+  <div class="demo card">
+    <div style="background-color: var(--back-color);">div element inside a card using --back-color</div>
+  </div>
+
+  <p>This the same as before but there is a <code>style="--back-color:silver"</code> definition on the
+    <code>.card</code> element.
+    This show how to overwrite a variable using a HTML inline style.
+  </p>
+
+  <div class="demo card" style="--back-color:silver">
+    <div style="background-color: var(--back-color);">div element inside a card with local defined --back-color</div>
+  </div>
+
+  <p>Press <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
+    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
+    to view the source code.</p>
+
+  <h2>API</h2>
+
+  <p>The variables can be read and modified on the style attribute of the HTML element. Just use
+    <code>style.getPropertyValue(name)</code> and
+    <code>style.setProperty(name, value)</code>.
+  </p>
+
+  <h2>Avoid naming conflicts</h2>
+
+  <p>In many implementations I have observed the variable names are somehow prefixed to avoid that components
+    from a library cashes another library because they both use the same variable name.</p>
+
+  <p>Using a name like <code>--libname-back-color</code> is advised.</p>
+
+  <h2>My Comments</h2>
+
+  <p>I use the CSS variables only for values that change during runtime. Using it instead of SCSS variables I cannot
+    recommend as it will blow up the size of your CSS code. As your web site likely doesn't have to support dynamic
+    theming SCSS approaches still have better support e.g. using linting tools to find typos or undeclared variables.
+  </p>
+
+  <p>In case you implement a web application that may be used in companies other than yours you may like to implement theming support. Here the variables offer a great place of defining the theme properties like colors in a central place.
+    However in great CSS frameworks I do not find this impelement
+    in a good way. I can find code like this using variables without a semantic value (from bootstrap):
+  </p>
+
+  <pre><code>--bs-blue: #0d6efd;
+--bs-indigo: #6610f2;
+--bs-purple: #6f42c1;
+--bs-pink: #d63384;
+--bs-red: #dc3545;</code></pre>
+
+  <p>In other applications you can find better approaches where UI elements can be styled using variables with semantic (from Monaco = vscode editor):</p>
+
+  <pre><code>.hc-black .monaco-custom-checkbox:hover{border:1px dashed var(--vscode-focusBorder)}</code></pre>
+
+  <p>A impressive set of variables that can be modified in theming can be found in the vscode documentation.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://caniuse.com/css-variables">https://caniuse.com/css-variables</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties</a></li>
+    <li><a href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.css">https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.css</a></li>
+    <li><a href="https://code.visualstudio.com/api/references/theme-color">https://code.visualstudio.com/api/references/theme-color</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>

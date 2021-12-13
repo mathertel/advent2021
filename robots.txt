@@ -1,2 +1,4 @@
 User-agent: *
+Disallow:
 Allow: /
+Sitemap: https://mathertel.github.io/advent2021/sitemap.xml
