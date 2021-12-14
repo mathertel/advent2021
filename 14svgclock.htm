@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>SVG clock with javascript</title>
+  <meta name="description" content="Build an active svg image showing a clock.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>SVG clock with javascript</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>SVG images must not be static.</p>
+  </fieldset>
+
+  </p>
+
+
+
+  <h2>SVG + Scripting Part 1</h2>
+
+  <p>This day you find a Proof of Concept (PoC) to combine SVG with JavaScript and CSS to create svg images with functionality.</p>
+
+  <p>The <b>svgclock.svg</b> you can find here provides the SVG Elements to display a clock.
+    Some scripting inside the SVG is then modifying the elements to display the current time.</p>
+
+  <p>What you get is a single file with the combination of SVG+CSS+JavaScript
+    instead of HTML+CSS+JavaScript so you can easily create non rectangular elements with great style support.
+
+  <h3>Images are dead</h3>
+
+  <p>The <a href="svgclock.svg">svgclock.svg</a> file contains such a combination that implements a clock adjusting the objects to show the current time.
+    The problem is that the SVG scripts run when started standalone but not when using in a
+    <code>img</code> tag like <code>&lt;img src="svgclock.svg"&gt;</code>.
+  </p>
+
+  <img src="./svgclock.svg" style="width:120px">
+
+  <p>To verify the implementation just open the link to the file to see it running in it's own window. The you can use
+    <button style="min-width:auto">Strg</button>+<button style="min-width:auto">U</button>
+    or <button style="min-width:auto">Ctrl</button>+<button style="min-width:auto">U</button>
+    to view the source code.
+  </p>
+
+
+  <h3>Objects enable scripts</h3>
+
+  <p>To enable scripting in SVG you have to use annother method to integrate into the HTML. The <code>object</code>
+    tag provides this kind of integration capability.</p>
+
+  <pre><code>&lt;object data="svgclock.svg" type="image/svg+xml" style="width:200px"&gt;&lt;/object&gt;</code></pre>
+
+  <object data="svgclock.svg" type="image/svg+xml" style="width:200px"></object>
+
+  <p>Here you see that the script is activated, and the clock shows the current time.</p>
+
+
+  <h3>Problems in Practice</h3>
+
+  <p>Today the development tools do not support yet inline JavaScript in svg as they do with HTML.
+    I found it useful to develop the JavaScript code in a separate file and to assemble all into one file manually.
+  </p>
+
+  <p>All so my advice to be careful with automatic source code formatting as some format as a destructive and will scramble all code into useless formatting.</p>
+
+
+  <h3>More to come</h3>
+
+  <p>Now we know how objects can be implemented using SVG the next step is to implement APIs.</p>
+
+  <p>There will be another door in the Advent Calendar on SVG+CSS+JavaScript...</p>
+
+
+
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started">https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started</a></li>
+    <li><a href="https://svgwg.org/svg2-draft/">https://svgwg.org/svg2-draft/</a></li>
+  </ul>
+
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+</body>
+
+</html>
