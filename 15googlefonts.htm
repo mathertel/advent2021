@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fetch (Google) Fonts Fast</title>
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Fetch (Google) Fonts Fast</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Fetch Fonts Fast by avoiding a roundtrip.</p>
+  </fieldset>
+
+  <h2>How it works</h2>
+
+  <p>When you use <a href="https://fonts.google.com">Google Fonts</a> you will have noticed that examples that show how
+    the font is loaded is done through a <code>css</code> file loaded from &lt;fonts.googleapis.com&gt;.</p>
+
+  <pre><code>&lt;link href='https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap' rel='stylesheet'&gt;</code></pre>
+
+  <h2>Is this a font download?</h2>
+
+  <p>No actually this link is actually downloading a css definition with a standard @font-face definition:</p>
+
+  <pre><code>@font-face {
+    font-family: 'Architects Daughter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/architectsdaughter/v11/KtkxAKiDZI_td1Lkx62xHZHDtgO_Y-bvTYlg4w.woff2)
+      format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F,
+      U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }</code></pre>
+
+  <p>Here you see the real font definition and where the font files can are available.</h2>
+
+  <h2>Download in one step</h2>
+
+  <p>To avoid the 2 step download the first download can be persisted in the page inline or in the CSS file.</p>
+
+  <p>As a second step the font data itself is then downloaded from &lt;fonts.gstatic.com&gt;</p>
+
+  <p>This gives you the opportunity to download the font file once and place it on your web server
+    instead of using the sources from the google hosted Content Delivery Network (CDN) if you need
+    full control over the files loaded into your web application or when you need to support offline
+    scenarios.</p>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+</body>
+
+</html>
