@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>Fetch (Google) Fonts Fast</title>
+  <meta name="description" content="How reduce the number of network roundtrips when loading web fonts.">
   <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
 </head>
 
@@ -23,6 +25,8 @@
     the font is loaded is done through a <code>css</code> file loaded from &lt;fonts.googleapis.com&gt;.</p>
 
   <pre><code>&lt;link href='https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap' rel='stylesheet'&gt;</code></pre>
+
+  <p>This seems to to be the optimal way and here we see how to reduce th number of network roundtrips when loading web fonts.</p>
 
   <h2>Is this a font download?</h2>
 
