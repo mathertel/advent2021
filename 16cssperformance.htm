@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>CSS Performance</title>
+  <meta name="description" content="Tools to analyze and optimize web page performance.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>CSS Performance</h1>
+
+  <fieldset>
+    <legend>excerpt</legend>
+    <p>A fool with a tool is still a fool.<br />Not using tools is foolish as well.</p>
+  </fieldset>
+
+  <p>Implementing performant web applications is an art on its own.
+    Even if you have no performance issues right now you may like to understand it better and avoid implementing patterns that do not scale.</p>
+  <p>Very important here is the time it takes to give the user the information or to make the application operational.</p>
+
+  <p>There are some tools I found useful.</p>
+
+  <h2>The csswizardry bookmark</h2>
+
+  <p>This is an entry for your favorite links that you can just to pimp up your a web page with hints about the elements in the header element
+    by including a CSS file:</p>
+
+  <pre><code>javascript:(function(){ var ct=document.createElement('link'); ct.rel='stylesheet';
+       ct.href='https://csswizardry.com/ct/ct.css'; ct.classList.add('ct'); document.head.appendChild(ct);}());</code></pre>
+
+  <ul>
+    <li>Install the bookmark in the toolbar</li>
+    <li>Open the page to be analyzed</li>
+    <li>Click the bookmark</li>
+  </ul>
+
+  <p>It rates the elements in the head on the impact regarding performance and adds hints and instructions.</p>
+  <p>If you study CSS, this one is a good victim for analysis. Be curious and look into the implementation ! - no javascript.</p>
+
+  <ul>
+    <li><a href="https://csswizardry.com/ct/">https://csswizardry.com/ct/</a></li>
+    <li><a href="https://github.com/csswizardry/ct/blob/master/ct.css">https://github.com/csswizardry/ct/blob/master/ct.css</a></li>
+  </ul>
+
+
+  <h2>Performance tab in developer tools</h2>
+
+  <p>The Developer Tools (F12) or (Shift-ctrl-I) available in Chrome and Edge browsers have evolved a lot in the last years.</p>
+
+  <p>They also include a tool to show and analyze the performance.
+    Together with the network tool it gives a lot of insights why page load is slow.</p>
+  <p>There is a lot to read about this tool:</p>
+
+  <ul>
+    <li><a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/">https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/evaluate-performance/">https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/evaluate-performance/</a></li>
+
+    <li><a href="https://developer.chrome.com/docs/devtools/">https://developer.chrome.com/docs/devtools/</a></li>
+    <li><a href="https://developer.chrome.com/docs/devtools/evaluate-performance/reference/">https://developer.chrome.com/docs/devtools/evaluate-performance/reference/</a></li>
+  </ul>
+
+
+  <h2>Online Tools</h2>
+
+  <p>There are tools available on the internet to analyze your web applications and pages.
+    They can fetch content from your web site and analyzes it when making your application available on the internet.</p>
+
+  <p>I found them of great value as they give great value for free.</p>
+
+  <p><b><a href="https://www.webpagetest.org/">https://www.webpagetest.org/</a></b> - Free tool but also good help inside the analytical results.</p>
+
+  <p><b><a href="https://pagespeed.web.dev/">https://pagespeed.web.dev/</a></b> - Free tool, also analyzing on the level of the downloaded content.</p>
+
+  <p><b><a href="https://www.seobility.net/en/seocheck/">https://www.seobility.net/en/seocheck/</a></b> - Checks topics about search engine optimization.</p>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+    <a href="tag-reading.htm">Reading Material</a>
+  </div>
+
+</body>
+
+</html>
