@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <title>Display Breadcrumbs</title>
+  <meta name="description" content="How to use CSS only to display breadcrumbs.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    .BREADCRUMBS {
+      display: block;
+      overflow: hidden;
+      font-size: 1.2rem;
+      --back-color: #203050;
+      --text-color: white;
+    }
+
+    .BREADCRUMBS a {
+      position: relative;
+      display: inline-block;
+      padding: 0.2em 0.4em;
+      margin-left: 0.7em;
+      line-height: 1em;
+      background: var(--back-color);
+      color: var(--text-color);
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .BREADCRUMBS a:hover {
+      --back-color: #E87B0C;
+    }
+
+    .BREADCRUMBS a:first-child {
+      margin-left: 0;
+    }
+
+    .BREADCRUMBS a:not(:first-child):before {
+      content: "";
+      border-top: 0.7em solid var(--back-color);
+      border-bottom: 0.7em solid var(--back-color);
+      border-left: 0.7em solid transparent;
+      position: absolute;
+      left: -0.7em;
+      top: 0;
+    }
+
+    .BREADCRUMBS a::after {
+      content: "";
+      border-top: 0.7em solid transparent;
+      border-bottom: 0.7em solid transparent;
+      border-left: 0.7em solid var(--back-color);
+      position: absolute;
+      right: -0.7em;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Display Breadcrumbs</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>We all know from fairy tales that breadcrumbs show the way home.</p>
+  </fieldset>
+
+  <p>The breadcrumb navigation is used to give the user a list of links to navigate in the page hierarchy.
+    Often it is easier to use this kind of navigation than using a given menu where all pages are reachable.</p>
+
+  <p>The links provided here are reflecting the hierarchy of the web site and may be created
+    together with the sitemap and menu to give a consistent virtual map of the side or application.</p>
+
+  <p>This navigation should not replace the back button in the browser that users will use to go back to where they come from.
+    The browseralso provides a list of the last visited urls in the tab when you press the back button for a longer time.</p>
+
+  <p>A typical breadcrumb list of links looks like this:</p>
+
+  <div class="BREADCRUMBS">
+    <a href='index.htm'>root</a>
+    <a href='index.htm'>folder</a>
+    <a href='index.htm'>file</a>
+  </div>
+
+  <h2>How it works</h2>
+
+  <p>The CSS code for this implementation is implemented very similar to the tag-list but now in a horizontal layout
+    using arrows as a metaphor.</p>
+
+  <pre id="csscode"><code></code></pre>
+  <script>
+    document.querySelector('pre#csscode code').textContent = document.querySelector('style').textContent.trim().replace(/^    /mg, "");
+  </script>
+
+  <ul>
+    <li>All links defined inside a BREADCRUMBS container are formatted as inline-blocks.</li>
+    <li>All but the first is extended using the <code>:before</code> pseudo element.</li>
+    <li>All are extended using the <code>:after</code> pseudo element.</li>
+    <li>All sizes are font-size relative</li>
+    <li>CSS variables are used to define the colors in a central place.</li>
+    <li>The :hover effect is changing the css variable to apply the hover color to the background and extensions.</li>
+  </ul>
+  <p>
+
+  <h2>See also</h2>
+
+  <ul>
+    <li><a href="02arrows.htm">CSS Arrows</a></li>
+    <li><a href="08tags.htm">Show Tags as Tags</a></li>
+    <li><a href="13cssvariables.htm">CSS Variables and Properties</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
