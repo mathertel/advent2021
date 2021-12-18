@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Types in JavaScript</title>
+  <meta name="description" content="Use type annotations in JavaScript.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Use type annotations in JavaScript</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>JavaScript is TypeScript - Typescript is JavaScript - to some degree.</p>
+  </fieldset>
+
+
+  <p>Do you prefer Typescript over JavaScript ?</p>
+
+  <p>I use both: JavaScript and TypeScript as the difference is getting less important.
+    One topic here is the support by the source code editors, especially VSCode being the most used IDE these days.</p>
+
+  <p>In TypeScript the "type sugar was added to JavaScript using declarations like:
+
+  <pre><code>let obj: HTMLImageElement = document.querySelector('img#logo');</code></pre>
+
+  <p>But the editor is not only taking the type from the TypeScript style declaration but also from the JSDoc comming with variables and functions.
+    By using this additional source VSCode supports HTML types even in JavaScript, not only in Typescript.</p>
+
+  <p>If you are a web developer using Visual Studio Code to develop in typescript you are already familiar with the great support
+    on attributes and methods in the autocomplete feature.</p>
+
+  <p>Here is the trick to enable this auto-completion also in JavaScript files by using the @type annotations in JSDoc comments before declaring variables and parameters</p>
+
+  <pre><code>// @type HTMLTableSectionElement
+let tbody = this.querySelector('tbody');
+tbody.
+
+function f(/** @type HTMLImageElement */ img) {
+  img.
+}</code></pre>
+
+  <p>Now, when the mouse hovers the variable name you can see the type definition is recognized. Or you add a dot behind the identifier the autocompletion works respecting the type of the variable like in TypeScript.</p>
+
+  <h2>See also</h2>
+
+  <ul>
+    <li><a href="https://ricostacruz.com/til/typescript-jsdoc">https://ricostacruz.com/til/typescript-jsdoc</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+</body>
+
+</html>
