@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>SVG Chart with API</title>
+  <meta name="description" content="A Gauge chart implemented in SVG+JavaScript with API.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style></style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>SVG Chart with API</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Connected via API.</p>
+  </fieldset>
+
+  <p>In <a href="14svgclock.htm">a previous page</a> we have seen how SVG+JavaScript can be combined
+    to create a compact, animated SVG graphics.</p>
+
+  <p>Here the same approach is used: All functionality comes with the SVG file
+    but it can be controlled by the script on the page where the SVG is embedded.
+    The handover point between page and SVG object is defined by the contract known as API (a Programming Interface).</p>
+
+  <h2>Playground</h2>
+
+  <p>
+    <button onclick="chartAPI.draw(-1);">-1</button>
+    <button onclick="chartAPI.draw(6.20);">6.20</button>
+    <button onclick="chartAPI.draw(20.4);">20.4</button>
+    <button onclick="chartAPI.draw(35);">35</button>
+    <button onclick="chartAPI.draw(50);">50</button>
+  </p>
+  <object id="testChart" data="chartgauge.svg" type="image/svg+xml" style="width:200px;height:200px;border:1px solid currentColor"></object>
+
+  <h2>How it works</h2>
+
+  <h3>1. Create the Chart</h3>
+  <p>To create the Gauge a simple object tag is required:</p>
+  <pre><code>&lt;object id="testChart" data="chartgauge.svg" type="image/svg+xml" style="..."&gt;&lt;/object&gt;</code></pre>
+
+  <h3>2. API access</h3>
+
+  <p>APIs are always exposed by a server (here the SVG object) and accessed by the client (script on the page)
+    so we need to find a place in the technology to implement this API. Here I use the document of the SVG element.
+  </p>
+
+  <p>In the SVG implementation you can find:</p>
+
+  <pre><code>// expose API functions.
+document['api'] = {
+  setOptions: function (opts) { ... },
+  draw: function (value) { ... },
+  clear: function () { ... },
+}</code></pre>
+
+  <p>The api javascript object is available on the document of the SVG element with a set of functions that can be called.</p>
+
+  <p>To access this from the page is is required to find this object inside the <code>&lt;object&gt; element</code> using the following code:</p>
+
+  <pre><code>var chartAPI = document.getElementById('testChart').getSVGDocument().api;</code></pre>
+
+  <h3>3. Configuration</h3>
+
+  <p>To setup the gauge in the colors and segments as we need it a descriptive objects can be passed to the setOptions function. The value to be displayed can be changed using the draw function.</p>
+
+  <pre><code>var gaugeOpts = {
+  title: "Room Temperature",
+  units: "°C",
+  minimum: 5,
+  maximum: 45,
+  segments: [
+    { value: 18, color: '#aaaadd' },
+    { value: 22, color: '#33cc33' },
+    { color: '#ff4444' }
+  ]
+};
+chartAPI.setOptions(gaugeOpts);</code></pre>
+
+  <h3>4. Set Values</h3>
+
+  <p>These buttons above the chart change the current value by calling the <code>draw()</code> function:</p>
+  <pre><code>chartAPI.draw(21.7);</code></pre>
+
+  <script>
+    var chartAPI;
+
+    var gaugeOpts = {
+      title: "Room Temperature",
+      units: "°C",
+      minimum: 5,
+      maximum: 45,
+      segments: [
+        { value: 18, color: '#aaaadd' },
+        { value: 22, color: '#33cc33' },
+        { color: '#ff4444' }
+      ]
+    };
+    window.addEventListener('load', function () {
+      chartAPI = document.getElementById('testChart').getSVGDocument().api;
+      chartAPI.setOptions(gaugeOpts);
+      chartAPI.draw(21.7);
+    });
+  </script>
+
+  <h2>Comment</h2>
+
+  <p>One problem is within scripting inside SVG as the script may not contain pointed brackets like &lt; and &gt;.
+    The browser will complain.</p>
+  <p>You either have to rewrite them with &amp;lt; in the code what makes the code worse
+    or use a <code>&lt;![CDATA[ ... ]]&gt;</code> around the script
+    as you can see in the CSS reference material and in the implementation.</p>
+
+  <p>This is a example on how to extend plain SVG with functionality. Maybe Web Controls also work ?
+    - However is is quiet useful to include a tag that contains all required functionality.</p>
+
+  <p>Maybe in the future the editors and the browsers can treat both the same way with full functionality.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="14svgclock.htm">SVG clock with JavaScript</a></li>
+    <li><a href="https://www.w3.org/TR/2018/CR-SVG2-20181004/interact.html">https://www.w3.org/TR/2018/CR-SVG2-20181004/interact.html</a></li>
+    <li><a href="https://homeding.github.io/#page=/microcharts.md">HomeDing MicroCharts</a></li>
+    <li><a href="https://homeding.github.io/#page=microchart-gauge.md">HomeDing Gauge</a></li>
+    <li><a href="https://homeding.github.io/#page=microchart-line.md">HomeDing Line Chart</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+</body>
+
+</html>
