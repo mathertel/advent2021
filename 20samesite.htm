@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Same Site Same Origin</title>
+  <meta name="description" content="Same Site Same Origin.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Same Site Same Origin</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Repairing the web is ongoing...</p>
+  </fieldset>
+
+  <p>The original implementation of the internet protocols and browsers was very promising about functionality but also has been naive regarding information security and privacy.</p>
+
+  <p>One aspect in the later is based on the fact that multiple web sites can share content, images, tracking pixels and scripts that - by intention or not - offers insights into the behavior of the user.</p>
+
+  <p>In the last years there were some refinements and corrections implemented, one of them are based on the terms
+    <code>cross-site</code> and <code>cross-domain</code>.
+  </p>
+
+  <p>In brief: The displayed page and the included assets can control what is allowed regarding integration.
+    The mechanisms in the browser gets hints and will allow / block according them.
+  </p>
+
+  <ul>
+    <li>To protect your web application you can specify from what site additional content like images, scripts, iframes sources etc. can be included.</li>
+    <li>To protect your assets you can specify how they can be included.</li>
+  </ul>
+
+  <p>Understanding is fundamental to controlling.</p>
+
+  <h2>More reading material</h2>
+
+  <p> I don't like to repeat material available on the web so here are links to articles giving an intro
+    I can recommend to understand the new features, the effects and options:</p>
+  <ul>
+    <li><a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
+    <li><a href="https://web.dev/same-site-same-origin/">https://web.dev/same-site-same-origin/</a> - Good intro article</li>
+    <li><a href="https://contentlab.io/what-web-developers-need-to-know-about-content-security-policy/">https://contentlab.io/what-web-developers-need-to-know-about-content-security-policy/</a></li>
+  </ul>
+
+  <p>More developer level information and references:</p>
+
+  <ul>
+    <li><a href="https://www.w3.org/2011/webappsec/">https://www.w3.org/2011/webappsec/</a></li>
+    <li><a href="https://publicsuffix.org/list/">https://publicsuffix.org/list/</a> - What is a top level domain can be found in this long list.</li>
+    <li><a href="https://www.w3.org/TR/fetch-metadata/">https://www.w3.org/TR/fetch-metadata/</a> - About the fetch before the fetch.</li>
+    <li><a href="https://dev.to/effingkay/cors-preflighted-requests--options-method-3024">https://dev.to/effingkay/cors-preflighted-requests--options-method-3024</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin</a> - control reuse of your assets</li>
+    <li><a href="https://developers.google.com/web/updates/2020/10/http-cache-partitioning">https://developers.google.com/web/updates/2020/10/http-cache-partitioning</a> - Changes in the caching behavior.</li>
+    <li><a href="https://docs.google.com/document/d/1V8sFDCEYTXZmwKa_qWUfTVNAuBcPsu6FC0PhqMD6KKQ/edit">https://docs.google.com/document/d/1V8sFDCEYTXZmwKa_qWUfTVNAuBcPsu6FC0PhqMD6KKQ/edit</a> - The Storage Isolation project</li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-reading.htm">Reading Material</a>
+  </div>
+
+</body>
+
+</html>
