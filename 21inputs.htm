@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Native Input Support for Datatypes</title>
+  <meta name="description" content="Use Input element with datatypes.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: 7em auto;
+      grid-gap: 5px;
+    }
+
+    .grid>label {
+      text-align: right;
+    }
+
+    input {
+      width: 32ch;
+    }
+
+    input[type=color] {
+      border-radius: 0;
+    }
+
+    input:valid {
+      border-color: green;
+    }
+
+    input:invalid {
+      border-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Native Input Support for Datatypes</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Input elements are different.</p>
+  </fieldset>
+
+  <p>I did some date picker implementations in the past and still many dat pickers are available as custom implementations.
+    The &lt;input&gt; element has support for some data types that are usable - others fail on different reasons.</p>
+
+  <form method="dialog">
+    <div class="grid">
+      <b>Type</b><b>Input</b>
+
+      <label>text:</label>
+      <div><input type="text" value="Hello" name="aText"> ok.</div>
+
+      <label>button:</label>
+      <div><input type="checkbox" name="aButton"> ok.</div>
+
+      <label>format*:</label>
+      <div><input type="text" value="123456" placeholder="enter 6 digits" pattern="[0-9]{6}" 
+        inputmode="numeric"
+        required name="aFormat"> ok. see *1)</div>
+
+      <label>date:</label>
+      <div><input type="date" value="2021-12-06" name="aDate"> ok.</div>
+
+      <label>datetime:</label>
+      <div><input type="datetime" name="aDateTime"> deprecated</div>
+
+      <label>datetime-local:</label>
+      <div><input type="datetime-local" name="aDateTimeLocal"> see *2)</div>
+
+      <label>color:</label>
+      <div><input type="color" value="#007700" name="aColor"> ok but not aligning like other input elements.</div>
+
+      <label>email:</label>
+      <div><input type="email" name="aEMail"> ok.</div>
+
+      <label>month:</label>
+      <div><input type="month" name="aMonth"> ok.</div>
+
+      <label>number:</label>
+      <div><input type="number" min="8" max="16" step="2" name="aNumber"> ok. see *1)</div>
+
+      <label>range:</label>
+      <div><input type="range" min="8" max="16" step="2" name="aRange"> ok. see *1)</div>
+
+      <label>search:</label>
+      <div><input type="search" name="aSearch"> special for searching</div>
+
+      <label>tel:</label>
+      <div><input type="tel" name="aPhone" placeholder="+49 ..." pattern="\+49[0-9 ]{7,15}" name="aTel"></div>
+
+      <label>url:</label>
+      <div><input value="https://github.com/mathertel/advent2021" type="url" name="aURL" required> see *1)</div>
+
+      <label>week:</label>
+      <div><input type="week" name="aWeek"> see *2)</div>
+    </div>
+    <hr>
+    <div style="text-align: right"><input id="test" type="submit" name="Submit"></div>
+
+  </form>
+
+  <p>Input elements get better slowly and bugs get fixed but still some data types do behave not as expected.
+    Some of them are quiet useful.</p>
+  <p>I like that the UI for e.g. changing date values as it is quiet useful and avoind much coding when relying on native support.</p>
+  <p>Others like the `color` type behave not as expected and cannot be controlled completely by CSS.</p>
+
+  <h2>Comments</h2>
+
+  <p>*1) The <b>pattern attribute</b> is not reflected when entering data but ony when validating the entered value.
+    It is necessary to add a hint for the user somewhere.</p>
+
+  <p>The <b>placeholder attribute</b> can be used for hints but it disappears when a value is present.</p>
+
+  <p>The <b>required attribute</b> </p>
+
+  <p>*2) The UI for the selecting values in the defined format vary. The behavior cannot be controlled
+    and e.g. is not reflecting the local format like weeks always start on sunday (not in Germany).</p>
+
+  <p>The code on the test button retrieves the form values as a Object so you can see the datatypes of date formatted as ISO.
+    The Checkbox is not returning a boolean :(.
+  </p>
+
+  <pre><code>var f = document.querySelector('form');
+document.querySelector('input#test').addEventListener('click',
+  function (evt) {
+    // get FormData as Object / JSON
+    var fd = new FormData(f);
+    const fData = {};
+    for (v of fd.keys()) {
+      fData[v] = fd.get(v);
+    };
+    alert(JSON.stringify(fData, null, 2));
+  });
+</code></pre>
+
+<p>will alert:</p>
+
+<pre><code>{
+  "aText": "Hello",
+  "aButton": "on",
+  "aFormat": "123456",
+  "aDate": "2021-12-06",
+  "aDateTime": "",
+  "aDateTimeLocal": "2021-12-06T08:43",
+  "aColor": "#007700",
+  "aEMail": "john.dow@rip.com",
+  "aMonth": "2021-12",
+  "aNumber": "",
+  "aRange": "12",
+  "aSearch": "",
+  "aPhone": "+491234567890",
+  "aURL": "https://github.com/mathertel/advent2021",
+  "aWeek": "2021-W49"
+}</code></pre>
+
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local</a></li>
+    <li><a href="https://miketaylr.com/code/input-type-attr.html">https://miketaylr.com/code/input-type-attr.html</a></li>
+    <li><a href="https://css-tricks.com/color-inputs-a-deep-dive-into-cross-browser-differences/">https://css-tricks.com/color-inputs-a-deep-dive-into-cross-browser-differences/</a></li>
+    <li><a href="https://web.dev/learn/forms/">https://web.dev/learn/forms/</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-js.htm">JavaScript</a>
+    <!-- <a href="tag-reading.htm">Reading Material</a> -->
+  </div>
+
+
+  <script>
+    var f = document.querySelector('form');
+
+    document.querySelector('input#test').addEventListener('click',
+      function (evt) {
+        // get FormData as Object / JSON
+        var fd = new FormData(f);
+        const fData = {};
+        for (v of fd.keys()) {
+          fData[v] = fd.get(v);
+        };
+        alert(JSON.stringify(fData, null, 2));
+      });
+  </script>
+
+
+</body>
+
+</html>
