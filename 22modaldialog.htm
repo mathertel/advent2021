@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Native Modal Dialog implementation</title>
+  <meta name="description" content="Implement a Modal Dialogs by using the dialog element.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    dialog::backdrop {
+      background-color: rgba(200, 200, 200, 0.7);
+    }
+
+    dialog {
+      padding: 0.5em;
+      background-color: Canvas;
+      border: 0;
+      box-shadow: .4em .4em #888888;
+    }
+
+    form>.menu {
+      margin-top: 0.4em;
+      border-top: 2px solid CanvasText;
+      padding-top: 0.4em;
+      text-align: end;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Native Modal Dialog implementation</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Almost there: Modal dialogs in the browser.</p>
+  </fieldset>
+
+  <p>You may have implemented applications that require focused user input.
+    The "Modal Dialog" approach is often used for the simplicity of implementing it.
+    However the real blocking modal dialogs are <code>window.alert</code> and <code>window.prompt</code> only.</p>
+
+  <p>There are many articles on how to implement a almost modal behavior in the browser but making it robust is a long story.</p>
+
+  <p>The <code>&lt;dialog&gt;</code> element is promissing as it adds native support to the topic.
+    In 2021 the chrome based browsers do have full standard support already and safari will follow as announced.</p>
+  </p>
+
+  <h2>How it works</h2>
+
+  <p>Implementing a modal dialog gets quiet easy by creating a <code>&lt;dialog&gt;</code> element
+    on the body level. It is not visible by default. Now use some scripting to call the <code>showModal()</code> function.</p>
+
+  <pre><code>&lt;dialog id="simple"&gt;
+  &lt;h2&gt;This is a dialog&lt;/h2&gt;
+  &lt;p&gt;Use the `esc` key to close (or reload the page).&lt;/p&gt;
+&lt;/dialog&gt;</code></pre>
+
+  <dialog id="simple">
+    <h2>This is a dialog</h2>
+    <p>Use the &lt;esc&gt; key to close (or reload the page).</p>
+  </dialog>
+
+  <p><button onclick="simpleDlg.showModal()">give it a try</button></p>
+
+  <p>Some CSS can be used to define the Layout of the dialogs, especially the ::backdrop pseudo elementcan be styled:</p>
+
+  <pre><code>dialog::backdrop {
+  background-color: rgba(200, 200, 200, 0.7);
+}
+
+dialog {
+  padding: 0.5em;
+  background-color: Canvas;
+  border: 0;
+  box-shadow: .4em .4em #888888;
+}</code></pre>
+
+
+  <p>One benfit is that all the elements outside the dialog element will not get the input focus any more.</p>
+
+  <h2>More scripting required</h2>
+
+  <p>The HTML element alone doesn't create a perfect modal dialog solution. Using some JavaScrip tou may resolve:</p>
+  <ul>
+    <li>Adding a close functionality that is visible.</li>
+    <li>passing parameters and retrieving results</li>
+    <li>navigation through multiple dialogs (step by step)</li>
+    <li>interact with a &lt;form&gt; element</li>
+  </ul>
+
+  <p>A more complex example of 2 chained dialogs
+    also uses the <code>&lt;form&gt;</code> element with <code>method="dialog"</code>
+    can be found here too including some scripts that solves some problems from above.</p>
+
+  <dialog id="step1">
+    <a class="back"></a>
+    <h2>Step 1 of 2</h2>
+    <form method="dialog" style="padding:0;margin:0">
+      <p>Native modal dialogs are awesome. </p>
+      <p><label>input1:</label><input autofocus></p>
+      <p><label>input2:</label><input></p>
+      <div class="menu">
+        <button type="submit" style="float: right;" value="next">next</button>
+        <button type="submit" value="no">cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="step2">
+    <a class="back"></a>
+    <form method="dialog" style="padding:0;margin:0">
+      <h2>Step 2 of 2</h2>
+      <p>This is awesome</p>
+      <input autofocus>
+      <div class="menu">
+        <button type="submit" style="float: right;" value="yes">done</button>
+        <button type="submit" value="back" style="float: left;">back</button>
+        <button type="submit" value="no">cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <button id="start" onclick="step1.showModal()">start...</button>
+
+  <script>
+    var simpleDlg = document.querySelector('dialog#simple');
+    /** @type HTMLDialogElement */
+    var step1 = document.querySelector('dialog#step1');
+    var step2 = document.querySelector('dialog#step2');
+
+    // allow closing using the red [X]
+    document.querySelectorAll('dialog > .back')
+      .forEach(cls => { cls.addEventListener('click', evt => evt.target.parentNode.close()) });
+
+    step1.addEventListener('close', function (evt) {
+      if (step1.returnValue === 'next') {
+        step2.showModal();
+      }
+    });
+
+    step2.addEventListener('close', function (evt) {
+      if (step2.returnValue === 'back') {
+        step1.showModal();
+      }
+    })
+  </script>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://usefulangle.com/post/110/html-dialog-element-to-create-modal-lightbox">https://usefulangle.com/post/110/html-dialog-element-to-create-modal-lightbox</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog</a></li>
+    <li><a href="https://caniuse.com/mdn-html_elements_dialog">https://caniuse.com/mdn-html_elements_dialog</a></li>
+    <li><a href="https://usefulangle.com/post/328/html-form-best-practices">https://usefulangle.com/post/328/html-form-best-practices</a></li>
+    <li><a href="https://github.com/GoogleChrome/dialog-polyfill">https://github.com/GoogleChrome/dialog-polyfill</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-js.htm">JavaScript</a>
+  </div>
+
+</body>
+
+</html>
