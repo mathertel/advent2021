@@ -38,6 +38,24 @@
 
   <p>Understanding is fundamental to controlling.</p>
 
+  <h2>Where the same sites or same origin applies</h2>
+  <ul>
+    <li>The download attribute in hyperlinks is only supported on links to the same-origin.</li>
+    <li>Cookies delivery can be controlled using the SameSite flag</li>
+    <li>iFrame source</li>
+    <li>iframe accessibility of content window and document</li>
+    <li>accessibility to the parent window from an iframe</li>
+    <li>using localStorage, sessionStorage, indexedDB, workers</li>
+    <li>Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy, crossOriginIsolated</li>
+    <li>Cross-Origin Resource Sharing (CORS), Content-Security-Policy</li>
+    <li>Loading JavaScript (CORS)</li>
+    <li>Loading Fonts (CORS)</li>
+    <li>fetch() initiated requests (CORS)</li>
+    <li>inbound requests initiated by other applications (X-Frame-Options)</li>
+    <li>and more...</li>
+  </ul>
+  
+
   <h2>More reading material</h2>
 
   <p> I don't like to repeat material available on the web so here are links to articles giving an intro
@@ -46,6 +64,7 @@
     <li><a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
     <li><a href="https://web.dev/same-site-same-origin/">https://web.dev/same-site-same-origin/</a> - Good intro article</li>
     <li><a href="https://contentlab.io/what-web-developers-need-to-know-about-content-security-policy/">https://contentlab.io/what-web-developers-need-to-know-about-content-security-policy/</a></li>
+    <li><a href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
   </ul>
 
   <p>More developer level information and references:</p>
@@ -54,10 +73,15 @@
     <li><a href="https://www.w3.org/2011/webappsec/">https://www.w3.org/2011/webappsec/</a></li>
     <li><a href="https://publicsuffix.org/list/">https://publicsuffix.org/list/</a> - What is a top level domain can be found in this long list.</li>
     <li><a href="https://www.w3.org/TR/fetch-metadata/">https://www.w3.org/TR/fetch-metadata/</a> - About the fetch before the fetch.</li>
-    <li><a href="https://dev.to/effingkay/cors-preflighted-requests--options-method-3024">https://dev.to/effingkay/cors-preflighted-requests--options-method-3024</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin</a> - control reuse of your assets</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy</a></li>
+    <li><a href="https://dev.to/effingkay/cors-preflighted-requests--options-method-3024">https://dev.to/effingkay/cors-preflighted-requests--options-method-3024</a></li>
     <li><a href="https://developers.google.com/web/updates/2020/10/http-cache-partitioning">https://developers.google.com/web/updates/2020/10/http-cache-partitioning</a> - Changes in the caching behavior.</li>
     <li><a href="https://docs.google.com/document/d/1V8sFDCEYTXZmwKa_qWUfTVNAuBcPsu6FC0PhqMD6KKQ/edit">https://docs.google.com/document/d/1V8sFDCEYTXZmwKa_qWUfTVNAuBcPsu6FC0PhqMD6KKQ/edit</a> - The Storage Isolation project</li>
+    <li><a href="https://owasp.org/www-commhttpunity/attacks/csrf">https://owasp.org/www-community/attacks/csrf</a></li>
+    <li><a href="https://securityintelligence.com/an-introduction-to-http-response-headers-for-security/">https://securityintelligence.com/an-introduction-to-http-response-headers-for-security/</a></li>
   </ul>
 
   <h2>Tags</h2>
