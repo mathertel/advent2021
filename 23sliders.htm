@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Use native sliders</title>
+  <meta name="description" content="Input values of type range can be customized.">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    .styled input[type='range'] {
+      font-size: 160%;
+      appearance: none;
+      -webkit-appearance: none;
+      height: 1.2em;
+      width: 30ch;
+      border: .1em solid #203050;
+      border-radius: 0.6em;
+      cursor: pointer;
+    }
+
+    .styled input[type='range']::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      height: 1em;
+      width: 1em;
+      border-radius: .5em;
+      background: #203050;
+    }
+
+    .styled input[type='range'].hue {
+      border-radius: 0;
+      border-width: 1px;
+
+      background: linear-gradient(to right,
+          red 0%,
+          yellow 17%,
+          lime 33%,
+          aqua 50%,
+          blue 67%,
+          fuchsia 83%,
+          red 100%);
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Implement native sliders by using range-inputs</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Why implement sliders for input when CSS (+ &lt;input&gt;) can too. Part 4.
+    <p>Slide back in instead of using custom implementations of sliders.</p>
+  </fieldset>
+
+  <p>There are many range slider implementations out on the internet. Most of them have been implemented using a huge amount of html, CSS and JavaScript.</p>
+  <p> But there is a lean alternate solution, a native implementation, not supporting every option but still useful to allow entering a value by simple touch gestures.</p>
+
+  <div><input type="range"></div>
+
+  <pre><code>&lt;input type=&quot;range&quot;&gt;</code></pre>
+
+  <p>By using some CSS you can apply another style after disabling the default appearance
+    and controlling shape and colors of the input element and the `-webkit-slider-thumb`:</p>
+
+  <div class="styled"><input type="range"></div>
+
+  <p>Here another example to define the hue value of a color - better than entering a numeric value but it behaves the same.</p>
+
+  <div class="styled"><input class="hue" type="range"></div>
+
+  <h2>CSS code example</h2>
+
+  <pre><code>input[type='range'] {
+  font-size: 160%;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 1.2em;
+  width: 30ch;
+  border: .1em solid #203050;
+  border-radius: 0.6em;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: .5em;
+  background: #203050;
+}
+
+input[type='range'].hue {
+  border-radius: 0;
+  border-width: 1px;
+
+  background: linear-gradient(to right, red 0%, yellow 17%, lime 33%, aqua 50%, blue 67%, fuchsia 83%, red 100%);
+}</code></pre>
+
+  <h2>More options</h2>
+
+  <p>The input type="range"
+    min
+    max
+    step
+  </p>
+
+  <p>To play around with the CSS applied to inputs you can try the CSS generators linked below.</p>
+
+  <h2>Comments</h2>
+
+  <p>Native browser functionality gets (slowly) better over time and there is the moment to switch from custom coding
+    to the standard element functionality that you should not miss. Especially when size counts.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li><a href="https://doodlenerd.com/html-control/css-input-range-generator">https://doodlenerd.com/html-control/css-input-range-generator</a></li>
+    <li><a href="https://www.cssportal.com/style-input-range/">https://www.cssportal.com/style-input-range/</a></li>
+    <li><a href="https://angular-slider.github.io/ngx-slider/demos">https://angular-slider.github.io/ngx-slider/demos</a></li>
+    <li><a href="https://bashooka.com/coding/25-amazing-css-range-slider-designs/">https://bashooka.com/coding/25-amazing-css-range-slider-designs/</a></li>
+  </ul>
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
