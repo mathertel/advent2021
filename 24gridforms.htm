@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <title>Grid for Forms</title>
+  <meta name="description" content="Grid and Flex layout models in CSS">
+  <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
+  <style>
+    /* some normalization */
+    label,
+    input,
+    button {
+      font-size: inherit;
+      padding: .1em .2em;
+    }
+
+    label {
+      border: .1em solid transparent;
+    }
+
+    input {
+      border: .1em solid CanvasText;
+      width: 32ch;
+    }
+
+    button {
+      border: .1em solid CanvasText;
+      border-radius: 6px;
+      padding-left: .4em;
+      padding-right: .4em;
+    }
+
+    /* Reponsive Form Grid  */
+
+    .formgrid {
+      display: grid;
+      grid-template-columns: 18ch auto;
+      grid-column-gap: .4em;
+      grid-row-gap: .2em;
+      font-size: 120%;
+    }
+
+    .formgrid>* {
+      grid-column-end: -1;
+    }
+
+    .formgrid>label {
+      text-align: right;
+      grid-column: 1;
+    }
+
+    @media (max-width: 767px) {
+      .formgrid {
+        grid-template-columns: auto;
+      }
+
+      .formgrid>label {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="javascript:history.back()"></a>
+  <h1>Grid for Forms</h1>
+
+  <fieldset>
+    <legend>Excerpt</legend>
+    <p>Another grid but the most comprehensive one.</p>
+  </fieldset>
+
+  <p>Building grids with CSS is a long ongoing story from using tables 20 years ago
+    until the <code>display:grid</code> was implemented in CSS as we know it today.
+    Again the technology was not really in focus for building web applications
+    as IE11 was used by many users and many features did work different there.</p>
+
+  <p>Thanks to Microsoft they RIPed IE finally after long time driving the web technology (remembering the outstanding IE5).</p>
+
+  <p>Thanks to Microsoft they RIPed it.</p>
+
+  <h2>Building a grid for forms</h2>
+
+  <p>We like things to be aligned like the labels and inputs in the form showcase below. This can be achieved by many css-grid-vs-flexbox-which-layout-to-choose-and-why like</p>
+  <ul>
+    <li>Invisible tables</li>
+    <li>fixed sized containers</li>
+    <li>A container-row-column system (like the bootstrap one)</li>
+    <li>Flex layout with fixed with (as it was more compatible cross browsers)</li>
+    <li>and grid !</li>
+  </ul>
+
+  <p>After trying all of the above in the last decades I must consist that the grid version is the most compact one.</p>
+
+  <h2>Form example</h2>
+
+  <div class="formgrid">
+    <label>Text:</label><input value="Text in the box">
+    <label>Input with Button:</label><span><input value><button>get</button></span>
+    <label>2 Lines Data:</label><input><input>
+    <label>Data4:</label><input>
+    <input type="range">
+  </div>
+
+  <h2>Grid is the real Grid</h2>
+
+  <p>To define a grid only the container element must be styled (in contrast to the flex element):</p>
+
+  <pre><code>.formgrid { display: grid; grid-template-columns: 1fr 2fr 1fr; }</code></pre>
+
+  <p>Of course there is more like gaps, repeat minmax functions etc. that help implementing a responsive grid.</p>
+
+  <h2>Grid layout for data forms</h2>
+
+  <p>I found is is usable for form layouts as well so here is the core implementation of a grid
+    where labels are in column 1 and column 2 is used for the input elements.</p>
+
+  <pre><code>.formgrid {
+  display: grid;
+  grid-template-columns: 16ch auto;
+  grid-column-gap: .4em;
+  grid-row-gap: .2em;
+}</code></pre>
+
+  <p>With 2 additional rules the labels are always placed into the first column while all other elements will go to the last column.</p>
+
+  <pre><code>.formgrid>* {
+  grid-column-end: -1;
+}
+
+.formgrid>label {
+  grid-column: 1;
+}</code></pre>
+
+  <p>The grid can be shrinked to a 1 column when the horizontal place is small by using a media rule:</p>
+
+  <pre><code>@media (max-width: 767px) {
+  .formgrid {
+    grid-template-columns: auto;
+  }
+
+  .formgrid>label {
+    text-align: left;
+  }
+}</code></pre>
+
+  <h2>Comments</h2>
+  <p>The grid is quiet usefull and well designed. I like that with minimal CSS a realistic usable grid can be built.
+    Definitively a feature to be used.</p>
+
+  <h2>See also</h2>
+  <ul>
+    <li>At <a href="https://www.w3schools.com/howto/howto_css_responsive_form.asp">https://www.w3schools.com/howto/howto_css_responsive_form.asp</a>
+      you can find an example on how to build responsive forms without a grid. As you can see you need many complex
+      css rules and even nesting html tags are required.</li>
+    <li><a href="https://jstutorial.medium.com/css-flex-vs-grid-tutorial-ffb92e115a98">https://jstutorial.medium.com/css-flex-vs-grid-tutorial-ffb92e115a98</a></li>
+    <li><a href="https://blog.udemy.com/css-grid-vs-flexbox/">https://blog.udemy.com/css-grid-vs-flexbox/</a></li>
+    <li><a href="https://www.unthinkable.co/blog-post/css-grid-vs-flexbox-which-layout-to-choose-and-why/">https://www.unthinkable.co/blog-post/css-grid-vs-flexbox-which-layout-to-choose-and-why/</a></li>
+  </ul>
+
+
+  <h2>Tags</h2>
+  <div class="taglist">
+    <a href="tag-css.htm">CSS</a>
+  </div>
+
+</body>
+
+</html>
