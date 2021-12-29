@@ -16,8 +16,10 @@ html {
   color-scheme: dark light;
   --color: #111111;
   --back: #eeeeee;
+}  
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  :root {
     --color: #eeeeee;
     --back: #111111;
   }
@@ -29,12 +31,6 @@ body {
   max-width: 800px;
   color: var(--color);
   background-color: var(--back);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: black;
-  }
 }
 
 .back {
@@ -62,7 +58,7 @@ pre > code {
 }
 
 a, a:hover, a:visited {
-  color: var(--color);
+  xcolor: var(--color);
   text-decoration: underline;
 }
 

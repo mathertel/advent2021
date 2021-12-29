@@ -9,14 +9,6 @@
   <title>CSS Dark Mode</title>
   <link Content-Type="text/css" href="advent2021.css" rel="stylesheet" />
   <style>
-    :root {
-      color-scheme: dark light;
-    }
-
-    h1 {
-      color-scheme: light;
-    }
-
     .info-box {
       padding: 0.4em;
       border-radius: 0.4em;
@@ -28,10 +20,6 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      body {
-        background-color: Canvas;
-      }
-
       .noswitch-warning-box {
         background-color: darkred;
         color: bisque;
@@ -45,13 +33,19 @@
       }
     }
 
-    .switch-warning-box {
-      background-color: bisque;
-      color: darkred;
+    .light-mode body {
+      color: #111111 !important;
+      background-color: #eeeeee !important;
     }
 
     .dark-mode body {
-      background-color: Canvas;
+      color: #eeeeee !important;
+      background-color: #111111 !important;
+    }
+
+    .light-mode .switch-warning-box {
+      background-color: bisque;
+      color: darkred;
     }
 
     .dark-mode .switch-warning-box {
@@ -70,7 +64,7 @@
     <p>The "dark mode" feature is still broken - but you can fix it.</p>
   </fieldset>
 
-  <div style="border:.1em solid CanvasText;background-color: Canvas; padding:0.2em;position:fixed;left:1em;top:0.2em;">
+  <div style="border:.1em solid var(--color);background-color: var(--back); padding:0.2em;position:fixed;left:1em;top:0.2em;">
     <button onclick="javascript:switchMode('dark light')">default</button>
     <button onclick="javascript:switchMode('light')">light</button>
     <button onclick="javascript:switchMode('dark')">dark</button>
@@ -197,13 +191,16 @@ function switchMode(colScheme) {
   if (colScheme === 'light') {
     document.documentElement.style.colorScheme = 'light';
     document.documentElement.classList.remove('dark-mode');
+    document.documentElement.classList.add('light-mode');
   } else if (colScheme === 'dark') {
     document.documentElement.style.colorScheme = 'dark';
-    document.documentElement.classList.add('dark-mode', true);
+    document.documentElement.classList.remove('light-mode');
+    document.documentElement.classList.add('dark-mode');
   } else {
     document.documentElement.style.colorScheme = 'dark light';
     const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.documentElement.classList.toggle('dark-mode', isDarkMode);
+    document.documentElement.classList.remove('dark-mode');
+    document.documentElement.classList.remove('light-mode');
   }
 };
 
@@ -274,14 +271,16 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(switchMode);
       if (colScheme === 'light') {
         document.documentElement.style.colorScheme = 'light';
         document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.add('light-mode');
       } else if (colScheme === 'dark') {
         document.documentElement.style.colorScheme = 'dark';
-        document.documentElement.classList.add('dark-mode', true);
+        document.documentElement.classList.remove('light-mode');
+        document.documentElement.classList.add('dark-mode');
       } else {
         document.documentElement.style.colorScheme = 'dark light';
         const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.classList.toggle('dark-mode', isDarkMode);
-        document.documentElement.style.colorScheme = isDarkMode ? 'dark' : 'light';
+        document.documentElement.classList.remove('dark-mode');
+        document.documentElement.classList.remove('light-mode');
       }
     };
 
