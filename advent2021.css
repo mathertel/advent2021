@@ -14,13 +14,21 @@ html {
 
 :root {
   color-scheme: dark light;
+  --color: #111111;
+  --back: #eeeeee;
+
+  @media (prefers-color-scheme: dark) {
+    --color: #eeeeee;
+    --back: #111111;
+  }
 }
 
 body {
   position: relative;
   margin: 0 auto;
   max-width: 800px;
-  background-color: #f7f7f7;
+  color: var(--color);
+  background-color: var(--back);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +46,7 @@ body {
   background-color: red;
   background-size: 2rem 2rem;
   background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M12 12L36 36M36 12L12 36' fill='none' stroke='white' stroke-width='12' stroke-linecap='round' /></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M12 12L36 36M36 12L12 36' stroke='white' stroke-width='12' stroke-linecap='round' /></svg>");
   user-select: none;
   cursor: pointer;
 }
@@ -53,8 +61,8 @@ pre > code {
   padding: 0.4em;
 }
 
-a:hover, a:visited, a {
-  color: CanvasText;
+a, a:hover, a:visited {
+  color: var(--color);
   text-decoration: underline;
 }
 
