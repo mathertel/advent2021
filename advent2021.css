@@ -58,7 +58,7 @@ pre > code {
 }
 
 a, a:hover, a:visited {
-  xcolor: var(--color);
+  color: currentColor;
   text-decoration: underline;
 }
 
