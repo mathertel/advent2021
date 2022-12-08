@@ -1,5 +1,8 @@
 # Advent Calendar 2021 Web Technologies
 
+[![pages-build-deployment](https://github.com/mathertel/advent2021/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/mathertel/advent2021/actions/workflows/pages/pages-build-deployment)
+[![Link Checker](https://github.com/mathertel/advent2021/actions/workflows/linkchecker.yml/badge.svg)](https://github.com/mathertel/advent2021/actions/workflows/linkchecker.yml)
+
 This Advent Calendar is hosted in <https://mathertel.github.io/advent2021/index.htm>
 
 An Advent calendar is a special calendar with 24 secrets behind doors used to count the days of Advent in anticipation of Christmas.
